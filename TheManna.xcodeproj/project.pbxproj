@@ -13,6 +13,8 @@
 		A700BB711EE07C1E003254B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A700BB6F1EE07C1E003254B0 /* LaunchScreen.storyboard */; };
 		A700BB791EE0809C003254B0 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB781EE0809C003254B0 /* RootViewController.swift */; };
 		A700BB7B1EE0E7FA003254B0 /* HomeDatasourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB7A1EE0E7FA003254B0 /* HomeDatasourceController.swift */; };
+		A700BB801EE0F2FA003254B0 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB7F1EE0F2FA003254B0 /* Cells.swift */; };
+		A700BB821EE0F318003254B0 /* HomeDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB811EE0F318003254B0 /* HomeDatasource.swift */; };
 		B0C838FA7C132831524DF2D4 /* Pods_TheManna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		A700BB721EE07C1E003254B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A700BB781EE0809C003254B0 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A700BB7A1EE0E7FA003254B0 /* HomeDatasourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDatasourceController.swift; sourceTree = "<group>"; };
+		A700BB7F1EE0F2FA003254B0 /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
+		A700BB811EE0F318003254B0 /* HomeDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDatasource.swift; sourceTree = "<group>"; };
 		E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheManna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -80,15 +84,41 @@
 		A700BB621EE07C1E003254B0 /* TheManna */ = {
 			isa = PBXGroup;
 			children = (
+				A700BB7E1EE0F2D2003254B0 /* View */,
+				A700BB7D1EE0F2CF003254B0 /* Model */,
+				A700BB7C1EE0F2CA003254B0 /* Controller */,
 				A700BB631EE07C1E003254B0 /* AppDelegate.swift */,
 				A700BB781EE0809C003254B0 /* RootViewController.swift */,
 				A700BB6D1EE07C1E003254B0 /* Assets.xcassets */,
 				A700BB6F1EE07C1E003254B0 /* LaunchScreen.storyboard */,
 				A700BB721EE07C1E003254B0 /* Info.plist */,
 				A700BB6A1EE07C1E003254B0 /* TheManna.xcdatamodeld */,
-				A700BB7A1EE0E7FA003254B0 /* HomeDatasourceController.swift */,
 			);
 			path = TheManna;
+			sourceTree = "<group>";
+		};
+		A700BB7C1EE0F2CA003254B0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A700BB7A1EE0E7FA003254B0 /* HomeDatasourceController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		A700BB7D1EE0F2CF003254B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A700BB811EE0F318003254B0 /* HomeDatasource.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A700BB7E1EE0F2D2003254B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A700BB7F1EE0F2FA003254B0 /* Cells.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +247,9 @@
 				A700BB6C1EE07C1E003254B0 /* TheManna.xcdatamodeld in Sources */,
 				A700BB7B1EE0E7FA003254B0 /* HomeDatasourceController.swift in Sources */,
 				A700BB791EE0809C003254B0 /* RootViewController.swift in Sources */,
+				A700BB821EE0F318003254B0 /* HomeDatasource.swift in Sources */,
 				A700BB641EE07C1E003254B0 /* AppDelegate.swift in Sources */,
+				A700BB801EE0F2FA003254B0 /* Cells.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

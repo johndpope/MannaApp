@@ -8,19 +8,7 @@
 
 import LBTAComponents
 
-class HomeDataSource: Datasource {
-    
-    let words = ["user1", "user2", "user3"]
-    
-    
-    override func numberOfItems(_ section: Int) -> Int {
-        return words.count
-    }
-    
-    override func item(_ indexPath: IndexPath) -> Any? {
-        return words[indexPath.row]
-    }
-}
+
 class HomeDatasourceController: DatasourceController {
     
     override func viewDidLoad() {
@@ -29,4 +17,30 @@ class HomeDatasourceController: DatasourceController {
         self.datasource = homeDatasource
         collectionView?.backgroundColor = UIColor.darkGray
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 50)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
