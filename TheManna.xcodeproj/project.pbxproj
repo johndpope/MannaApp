@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A700BB641EE07C1E003254B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB631EE07C1E003254B0 /* AppDelegate.swift */; };
-		A700BB661EE07C1E003254B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB651EE07C1E003254B0 /* ViewController.swift */; };
-		A700BB691EE07C1E003254B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A700BB671EE07C1E003254B0 /* Main.storyboard */; };
 		A700BB6C1EE07C1E003254B0 /* TheManna.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A700BB6A1EE07C1E003254B0 /* TheManna.xcdatamodeld */; };
 		A700BB6E1EE07C1E003254B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A700BB6D1EE07C1E003254B0 /* Assets.xcassets */; };
 		A700BB711EE07C1E003254B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A700BB6F1EE07C1E003254B0 /* LaunchScreen.storyboard */; };
@@ -19,8 +17,6 @@
 /* Begin PBXFileReference section */
 		A700BB601EE07C1E003254B0 /* TheManna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheManna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A700BB631EE07C1E003254B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A700BB651EE07C1E003254B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A700BB681EE07C1E003254B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A700BB6B1EE07C1E003254B0 /* TheManna.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheManna.xcdatamodel; sourceTree = "<group>"; };
 		A700BB6D1EE07C1E003254B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A700BB701EE07C1E003254B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -60,8 +56,6 @@
 			children = (
 				A700BB631EE07C1E003254B0 /* AppDelegate.swift */,
 				A700BB781EE0809C003254B0 /* RootViewController.swift */,
-				A700BB651EE07C1E003254B0 /* ViewController.swift */,
-				A700BB671EE07C1E003254B0 /* Main.storyboard */,
 				A700BB6D1EE07C1E003254B0 /* Assets.xcassets */,
 				A700BB6F1EE07C1E003254B0 /* LaunchScreen.storyboard */,
 				A700BB721EE07C1E003254B0 /* Info.plist */,
@@ -132,7 +126,6 @@
 			files = (
 				A700BB711EE07C1E003254B0 /* LaunchScreen.storyboard in Resources */,
 				A700BB6E1EE07C1E003254B0 /* Assets.xcassets in Resources */,
-				A700BB691EE07C1E003254B0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A700BB6C1EE07C1E003254B0 /* TheManna.xcdatamodeld in Sources */,
-				A700BB661EE07C1E003254B0 /* ViewController.swift in Sources */,
 				A700BB791EE0809C003254B0 /* RootViewController.swift in Sources */,
 				A700BB641EE07C1E003254B0 /* AppDelegate.swift in Sources */,
 			);
@@ -153,14 +145,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A700BB671EE07C1E003254B0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A700BB681EE07C1E003254B0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A700BB6F1EE07C1E003254B0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
