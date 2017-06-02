@@ -15,7 +15,12 @@ class HomeDatasourceController: DatasourceController {
         super.viewDidLoad()
         let homeDatasource = HomeDataSource()
         self.datasource = homeDatasource
-        collectionView?.backgroundColor = UIColor.darkGray
+        collectionView?.backgroundColor = UIColor.white
+    }
+    
+
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
