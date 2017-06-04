@@ -12,14 +12,34 @@ import LBTAComponents
 class HomeDatasourceController: DatasourceController {
     
     override func viewDidLoad() {
+        
+        setupNavigationBarItems()
+        
         super.viewDidLoad()
         let homeDatasource = HomeDataSource()
         self.datasource = homeDatasource
         collectionView?.backgroundColor = UIColor.white
+        
+        
     }
-    
 
+
+    
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if let user = self.datasource?.item(indexPath) as? User {
+            
+            let approximateWidthOfBioTextView = view.frame.width - 12 - 50 - 12
+            
+            let size = CGSize(width: approximateWidthOfBioTextView, height: 1000)
+            
+            let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
+            
+            let estimatedFrame = NSString(string: user.bioText).boundingRect(with: size, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes, context: nil)
+            
+            return CGSize(width: view.frame.width, height: estimatedFrame.height + 75)
+        }
+        
         return CGSize(width: view.frame.width, height: 150)
     }
     
@@ -29,6 +49,10 @@ class HomeDatasourceController: DatasourceController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 
