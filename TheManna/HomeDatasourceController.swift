@@ -18,7 +18,7 @@ class HomeDatasourceController: DatasourceController {
         super.viewDidLoad()
         let homeDatasource = HomeDataSource()
         self.datasource = homeDatasource
-        collectionView?.backgroundColor = UIColor.white
+        collectionView?.backgroundColor = UIColor.lightGray
         
         
     }

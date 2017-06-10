@@ -22,7 +22,14 @@ class HomeDataSource: Datasource {
         return [brianUser, rayUser, kindleCourseUser]
     }()
     
-    let tweets = ["Tweet1", "Tweet2"]
+    let tweets: [Tweet] = {
+        let brianUser = User(name: "Sean Zhang", username: "@sean7218", bioText: "For the wages of sin is death and the free gift of God is eternal life in Christ Jesus.", profileImage: #imageLiteral(resourceName: "selfie"))
+        
+        let tweet = Tweet(user: brianUser, message: "Welcome to episode 9 of the Twitter Series, really hope you guys are enjoying series so far. I really really need a long ext block to ender out so w're going to stop here.")
+        
+        let tweet2 = Tweet(user: brianUser, message: "This is the second tweet message for our sample project. Very very exciting message......")
+        return [tweet,tweet2]
+    }()
     
     override func footerClasses() -> [DatasourceCell.Type]? {
         return [UserFooter.self]
@@ -50,6 +57,9 @@ class HomeDataSource: Datasource {
     }
     
     override func item(_ indexPath: IndexPath) -> Any? {
+        if indexPath.section == 1 {
+            return tweets[indexPath.row]
+        }
         return users[indexPath.row]
     }
 }
