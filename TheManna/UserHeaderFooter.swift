@@ -13,9 +13,11 @@ let twitterBlue = UIColor(r: 61, g: 167, b: 244) //#3da7f4
 
 class UserFooter: DatasourceCell {
     
+    
+    
     let textLabel: UILabel = {
         let label = UILabel()
-        label.text = "SHOW ME MORE"
+        label.text = "Scripture Memorization"
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = twitterBlue
         return label
@@ -23,8 +25,15 @@ class UserFooter: DatasourceCell {
     
     override func setupViews() {
         super.setupViews()
+        
+        let whiteBackgroundView = UIView()
+        whiteBackgroundView.backgroundColor = .red
+        
         addSubview(textLabel)
-        textLabel.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 12, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        addSubview(whiteBackgroundView)
+        
+        textLabel.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 12, leftConstant: 10, bottomConstant: 14, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        whiteBackgroundView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 14, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
 }
 
@@ -32,7 +41,7 @@ class UserHeader: DatasourceCell {
     
     let textLabel: UILabel = {
         let label = UILabel()
-        label.text = "WHO TO FOLLOW"
+        label.text = "See more verses"
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()

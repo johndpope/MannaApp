@@ -19,7 +19,7 @@ extension HomeDatasourceController {
     
     private func setupRemainingNavItems() {
         navigationItem.titleView = {
-            let titleImageView: UIImageView = UIImageView(image: #imageLiteral(resourceName: "twitter"))
+            let titleImageView: UIImageView = UIImageView(image: nil)
             titleImageView.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
             titleImageView.contentMode = .scaleAspectFit
             return titleImageView

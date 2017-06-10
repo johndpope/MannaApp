@@ -63,10 +63,10 @@ class UserCell: DatasourceCell {
         button.layer.cornerRadius = 5
         button.layer.borderColor = twitterBlue.cgColor
         button.layer.borderWidth = 1
-        button.setTitle("Follow", for: .normal)
+        button.setTitle("Actions", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(twitterBlue, for: .normal)
-        button.setImage(#imageLiteral(resourceName: "follow"), for: .normal)
+        button.setImage(nil, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         
         button.titleLabel?.translatesAutoresizingMaskIntoConstraints = false

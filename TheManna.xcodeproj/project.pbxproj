@@ -18,6 +18,7 @@
 		A700BB861EE361D9003254B0 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB851EE361D9003254B0 /* UserCell.swift */; };
 		A700BB881EE43AFC003254B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A700BB871EE43AFC003254B0 /* Assets.xcassets */; };
 		A700BB8A1EE43FF2003254B0 /* HomeDatasourceController+navbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB891EE43FF2003254B0 /* HomeDatasourceController+navbar.swift */; };
+		A700BB901EEB97B4003254B0 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB8F1EEB97B4003254B0 /* TweetCell.swift */; };
 		B0C838FA7C132831524DF2D4 /* Pods_TheManna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		A700BB851EE361D9003254B0 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		A700BB871EE43AFC003254B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A700BB891EE43FF2003254B0 /* HomeDatasourceController+navbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeDatasourceController+navbar.swift"; sourceTree = "<group>"; };
+		A700BB8F1EEB97B4003254B0 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheManna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,6 +128,7 @@
 			children = (
 				A700BB7F1EE0F2FA003254B0 /* UserHeaderFooter.swift */,
 				A700BB851EE361D9003254B0 /* UserCell.swift */,
+				A700BB8F1EEB97B4003254B0 /* TweetCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				A700BB791EE0809C003254B0 /* RootViewController.swift in Sources */,
 				A700BB821EE0F318003254B0 /* HomeDatasource.swift in Sources */,
 				A700BB641EE07C1E003254B0 /* AppDelegate.swift in Sources */,
+				A700BB901EEB97B4003254B0 /* TweetCell.swift in Sources */,
 				A700BB801EE0F2FA003254B0 /* UserHeaderFooter.swift in Sources */,
 				A700BB841EE35871003254B0 /* User.swift in Sources */,
 			);
