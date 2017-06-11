@@ -35,12 +35,34 @@ class TweetCell: DatasourceCell {
         
     }
     
+    let replyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "Reply").withRenderingMode(.alwaysOriginal), for: .normal)
+        return button
+    }()
     
+    let retweetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "Retweet").withRenderingMode(.alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "Like").withRenderingMode(.alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let directMessageButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "direct_message").withRenderingMode(.alwaysOriginal), for: .normal)
+        return button
+    }()
     
     let messageTextView: UITextView = {
         let tv = UITextView()
         tv.text = "Some sample text"
-  
+        tv.backgroundColor = .clear
         return tv
     }()
     
@@ -60,8 +82,53 @@ class TweetCell: DatasourceCell {
         
         addSubview(profileImageView)
         addSubview(messageTextView)
+        addSubview(replyButton)
+        addSubview(retweetButton)
         
         profileImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
         messageTextView.anchor(topAnchor, left: profileImageView.rightAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 4, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        replyButton.anchor(nil, left: messageTextView.leftAnchor, bottom: self.bottomAnchor, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+
+        
+        setupBottomButton()
+    }
+    
+    fileprivate func setupBottomButton() {
+        let replyButtonContainerView = UIView()
+    
+        
+        let retweetButtonContainerView = UIView()
+        
+        
+        let likeButtonContainerVivew = UIView()
+        
+        
+        let directMessageButtonContainerView = UIView()
+        
+        
+        let buttonStackView = UIStackView(arrangedSubviews: [replyButtonContainerView, retweetButtonContainerView, likeButtonContainerVivew, directMessageButtonContainerView])
+        buttonStackView.axis = .horizontal
+        buttonStackView.distribution = .fillEqually
+        
+        addSubview(buttonStackView)
+        buttonStackView.anchor(nil, left: messageTextView.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 4, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+        
+        addSubview(replyButton)
+        addSubview(retweetButton)
+        addSubview(likeButton)
+        addSubview(directMessageButton)
+        
+        replyButton.anchor(replyButton.topAnchor, left: replyButtonContainerView.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+        retweetButton.anchor(retweetButtonContainerView.topAnchor, left: retweetButtonContainerView.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+        likeButton.anchor(likeButtonContainerVivew.topAnchor, left: likeButtonContainerVivew.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
+        directMessageButton.anchor(directMessageButtonContainerView.topAnchor, left: directMessageButtonContainerView.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
     }
 }
+
+
+
+
+
+
+
+
