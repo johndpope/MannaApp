@@ -7,7 +7,7 @@
 //
 
 import LBTAComponents
-
+import Parse
 
 class HomeDatasourceController: DatasourceController {
     
@@ -16,6 +16,7 @@ class HomeDatasourceController: DatasourceController {
     }
     
     override func viewDidLoad() {
+        
         
         setupNavigationBarItems()
         
@@ -27,7 +28,7 @@ class HomeDatasourceController: DatasourceController {
         
     }
 
-
+    
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
