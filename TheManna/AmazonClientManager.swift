@@ -46,41 +46,12 @@ class AmazonClientManager: NSObject {
     func resumeSession(completionHandler: AWSContinuationBlock) {
         self.completionHandler = completionHandler
         
-        if self.keyChain[BYOI_PROVIDER] != nil {
-            self.reloadBYOISession()
-        } else if self.keyChain[FB_PROVIDER] != nil {
-            self.reloadFBSession()
-        } else if self.keyChain[AMAZON_PROVIDER] != nil {
-            self.amazonLogin()
-        } else if self.keyChain[GOOGLE_PROVIDER] != nil {
-            self.reloadGSession()
-        } else if self.keyChain[TWITTER_PROVIDER] != nil {
-            self.twitterLogin()
-        } else if self.keyChain[DIGITS_PROVIDER] != nil {
-            self.digitsLogin()
-        }
         
         if self.credentialsProvider == nil {
-            self.completeLogin(nil)
+            self.completeLogin(logins: nil)
         }
     }
     
-    //Sends the appropriate URL based on login provider
-    func application(application: UIApplication,
-        openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-            if GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation) {
-                return true
-            }
-            
-            if FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) {
-                return true
-            }
-            
-            if AIMobileLib.handleOpenURL(url, sourceApplication: sourceApplication) {
-                return true
-            }
-            return false
-    }
     
     func completeLogin(logins: [NSObject : AnyObject]?) {
         var task: AWSTask?
@@ -133,10 +104,10 @@ class AmazonClientManager: NSObject {
         }.continueWithBlock(self.completionHandler)
     }
     
-    func initializeClients(logins: [NSObject : AnyObject]?) -> AWSTask? {
+    func initializeClients(logins: [NSObject : AnyObject]?) -> AWSTask<AnyObject>? {
         print("Initializing Clients...")
         
-        AWSLogger.defaultLogger().logLevel = AWSLogLevel.Verbose
+        AWSLogger.default().logLevel = AWSLogLevel.verbose
         
         let identityProvider = DeveloperAuthenticatedIdentityProvider(
             regionType: Constants.COGNITO_REGIONTYPE,
@@ -159,17 +130,7 @@ class AmazonClientManager: NSObject {
     }
     
     func logOut(completionHandler: AWSContinuationBlock) {
-        if self.isLoggedInWithFacebook() {
-            self.fbLogout()
-        } else if self.isLoggedInWithAmazon() {
-            self.amazonLogout()
-        } else if self.isLoggedInWithGoogle() {
-            self.googleLogout()
-        } else if self.isLoggedInWithTwitter() {
-            self.twitterLogout()
-        } else if self.isLoggedInWithDigits() {
-            self.digitsLogout()
-        }
+
         self.devAuthClient?.logout()
         
         // Wipe credentials
@@ -181,7 +142,9 @@ class AmazonClientManager: NSObject {
     }
     
     func isLoggedIn() -> Bool {
-        return isLoggedInWithFacebook() || isLoggedInWithGoogle() || isLoggedInWithTwitter() || isLoggedInWithDigits() || isLoggedInWithAmazon() || isLoggedInWithBYOI()
+//        return isLoggedInWithFacebook() || isLoggedInWithGoogle() || isLoggedInWithTwitter() || isLoggedInWithDigits() || isLoggedInWithAmazon() || isLoggedInWithBYOI()
+        
+        return false
     }
     
 }
