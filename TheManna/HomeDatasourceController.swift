@@ -16,7 +16,7 @@ class HomeDatasourceController: DatasourceController {
     }
     
     override func viewDidLoad() {
-        
+
         
         setupNavigationBarItems()
         
@@ -45,7 +45,7 @@ class HomeDatasourceController: DatasourceController {
             return CGSize(width: view.frame.width, height: estimatedFrame.height + 75)
         }
         
-        return CGSize(width: view.frame.width, height: 150)
+        return CGSize(width: view.frame.width, height: 450)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

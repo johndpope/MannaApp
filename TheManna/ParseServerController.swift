@@ -12,7 +12,7 @@ import Parse
 class ParseServerController: NSObject {
     
     override init() {
-        //Well
+        
         super.init()
     }
     
@@ -26,9 +26,74 @@ class ParseServerController: NSObject {
     }
     
     func uploadImage()  {
-        //Upload an image file onto the Parse Server
-        let imageData = UIImagePNGRepresentation(#imageLiteral(resourceName: "twitter"))
-        print("imageData: \(String(describing: imageData))")
-        let imageFile = PFile
+
+        let testObject = PFObject(className: "TestObject")
+        
+        testObject["files"] = UIImagePNGRepresentation(#imageLiteral(resourceName: "twitter"))
+        
+        testObject.saveInBackground { (success: Bool, error: Error?) -> Void in
+            print("Object has been saved.----------------------------------------")
+        }
     }
+    
+    func retrieveObjects()  {
+        let query = PFQuery(className: "JSONTable")
+        query.whereKey("name", contains: "josh")
+        query.findObjectsInBackground{ (objects: [PFObject]?, error: Error?) in
+            if (error != nil) {
+                if let fetchedObjects = objects {
+                    for ojb in fetchedObjects {
+                        print(ojb)
+                    }
+                }
+            } else {
+                if let err = error {
+                    print(err)
+                }
+                
+            }
+            
+        }
+    }
+
+    func downloadImageFile() -> UIImage {
+        var image: UIImage? = UIImage()
+        let query = PFQuery(className: "TestObject")
+        query.whereKey("objectId", equalTo: "mUdedS4oJB")
+        //query.whereKey("foo", contains: "bar")
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) -> Void in
+            
+            if error == nil {
+                // The find succeeded.
+                print("Successfully retrieved \(objects!.count) items.")
+                // Do something with the found objects
+                if let objects = objects {
+                    for object in objects {
+                        //place this in your for loop
+                        let imageFile = (object.object(forKey: "ImageFile") as? PFFile)
+                        imageFile?.getDataInBackground (block: { (data, error) -> Void in
+                            if error == nil {
+                                print("Image Successfully Downloaded")
+                                if let imageData = data {
+                                    //Here you can cast it as a UIImage or do what you need to
+                                    image = UIImage(data:imageData)
+                                } else {
+                                    
+                                }
+                            } else {
+                                print(error ?? "Error Has occured??r")
+                            }
+                        })
+                        
+                    }
+                }
+            } else {
+                // Log details of the failure
+                print("Error: \(error!) \(error!.localizedDescription)")
+            }
+        }
+        return image!
+    }
+        
 }
+

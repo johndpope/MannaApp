@@ -77,9 +77,14 @@ class UserCell: DatasourceCell {
         button.imageView?.heightAnchor.constraint(equalToConstant: 20).isActive = true
         button.imageView?.rightAnchor.constraint(equalTo: (button.titleLabel?.leftAnchor)!, constant: -5).isActive = true
         
+        button.addTarget(self, action: #selector(triggerPDFViewControoler), for: UIControlEvents.touchUpInside)
         
         return button
     }()
+    
+    func triggerPDFViewControoler()  {
+        print(123)
+    }
     
     override func setupViews() {
         super.setupViews()
