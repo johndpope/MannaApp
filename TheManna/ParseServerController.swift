@@ -56,8 +56,10 @@ class ParseServerController: NSObject {
         }
     }
 
-    func downloadImageFile() -> UIImage {
-        var image: UIImage? = UIImage()
+    func downloadImageFile() -> Data? {
+     
+        var returnData: Data?
+        
         let query = PFQuery(className: "TestObject")
         query.whereKey("objectId", equalTo: "mUdedS4oJB")
         //query.whereKey("foo", contains: "bar")
@@ -65,25 +67,24 @@ class ParseServerController: NSObject {
             
             if error == nil {
                 // The find succeeded.
-                print("Successfully retrieved \(objects!.count) items.")
+                print("Successfully retrieved \(String(describing: objects?.count)) items.")
                 // Do something with the found objects
                 if let objects = objects {
                     for object in objects {
                         //place this in your for loop
-                        let imageFile = (object.object(forKey: "ImageFile") as? PFFile)
-                        imageFile?.getDataInBackground (block: { (data, error) -> Void in
+                        let imageFile = object["files"] as! PFFile
+                        
+                        imageFile.getDataInBackground {
+                            (imageData: Data?, error: Error?) -> Void in
                             if error == nil {
-                                print("Image Successfully Downloaded")
-                                if let imageData = data {
-                                    //Here you can cast it as a UIImage or do what you need to
-                                    image = UIImage(data:imageData)
-                                } else {
-                                    
+                                print("Image File Data Transmitted")
+                                if let data = imageData {
+                                
+                                    returnData = data
+
                                 }
-                            } else {
-                                print(error ?? "Error Has occured??r")
                             }
-                        })
+                        }
                         
                     }
                 }
@@ -92,7 +93,7 @@ class ParseServerController: NSObject {
                 print("Error: \(error!) \(error!.localizedDescription)")
             }
         }
-        return image!
+        return returnData
     }
         
 }
