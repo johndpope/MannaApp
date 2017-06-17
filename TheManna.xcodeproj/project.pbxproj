@@ -20,8 +20,6 @@
 		A700BB8A1EE43FF2003254B0 /* HomeDatasourceController+navbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB891EE43FF2003254B0 /* HomeDatasourceController+navbar.swift */; };
 		A700BB901EEB97B4003254B0 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB8F1EEB97B4003254B0 /* TweetCell.swift */; };
 		A700BB921EEC0FF4003254B0 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB911EEC0FF4003254B0 /* Tweet.swift */; };
-		A700BB961EED6C69003254B0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A700BB941EED6C69003254B0 /* Bolts.framework */; };
-		A700BB971EED6C69003254B0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A700BB951EED6C69003254B0 /* Parse.framework */; };
 		A700BB991EED6CAF003254B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A700BB981EED6CAF003254B0 /* AudioToolbox.framework */; };
 		A700BB9B1EED6CC0003254B0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A700BB9A1EED6CC0003254B0 /* libsqlite3.tbd */; };
 		A700BB9D1EED6CCB003254B0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A700BB9C1EED6CCB003254B0 /* libz.tbd */; };
@@ -32,8 +30,6 @@
 		A700BBA71EED6CF3003254B0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A700BBA61EED6CF3003254B0 /* CoreLocation.framework */; };
 		A700BBA91EED6CFA003254B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A700BBA81EED6CFA003254B0 /* CoreGraphics.framework */; };
 		A700BBAB1EED6D02003254B0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A700BBAA1EED6D02003254B0 /* CFNetwork.framework */; };
-		A700BBB41EEE45C7003254B0 /* ParseServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BBB31EEE45C7003254B0 /* ParseServerController.swift */; };
-		A70881391EF22BC900DCA947 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881381EF22BC900DCA947 /* PDFViewController.swift */; };
 		B0C838FA7C132831524DF2D4 /* Pods_TheManna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,8 +51,6 @@
 		A700BB891EE43FF2003254B0 /* HomeDatasourceController+navbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeDatasourceController+navbar.swift"; sourceTree = "<group>"; };
 		A700BB8F1EEB97B4003254B0 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		A700BB911EEC0FF4003254B0 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
-		A700BB941EED6C69003254B0 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		A700BB951EED6C69003254B0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		A700BB981EED6CAF003254B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A700BB9A1EED6CC0003254B0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A700BB9C1EED6CCB003254B0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -67,8 +61,6 @@
 		A700BBA61EED6CF3003254B0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A700BBA81EED6CFA003254B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A700BBAA1EED6D02003254B0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		A700BBB31EEE45C7003254B0 /* ParseServerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseServerController.swift; sourceTree = "<group>"; };
-		A70881381EF22BC900DCA947 /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheManna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -88,8 +80,6 @@
 				A700BB9B1EED6CC0003254B0 /* libsqlite3.tbd in Frameworks */,
 				A700BB991EED6CAF003254B0 /* AudioToolbox.framework in Frameworks */,
 				B0C838FA7C132831524DF2D4 /* Pods_TheManna.framework in Frameworks */,
-				A700BB971EED6C69003254B0 /* Parse.framework in Frameworks */,
-				A700BB961EED6C69003254B0 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +116,6 @@
 		A700BB571EE07C1E003254B0 = {
 			isa = PBXGroup;
 			children = (
-				A700BB931EED6C32003254B0 /* Parse-iOS */,
 				A700BB621EE07C1E003254B0 /* TheManna */,
 				A700BB611EE07C1E003254B0 /* Products */,
 				5DC62B4D4EE4EF5F144847B2 /* Pods */,
@@ -161,8 +150,6 @@
 		A700BB7C1EE0F2CA003254B0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A70881381EF22BC900DCA947 /* PDFViewController.swift */,
-				A700BBB31EEE45C7003254B0 /* ParseServerController.swift */,
 				A700BB7A1EE0E7FA003254B0 /* HomeDatasourceController.swift */,
 				A700BB891EE43FF2003254B0 /* HomeDatasourceController+navbar.swift */,
 			);
@@ -187,15 +174,6 @@
 				A700BB8F1EEB97B4003254B0 /* TweetCell.swift */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		A700BB931EED6C32003254B0 /* Parse-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				A700BB941EED6C69003254B0 /* Bolts.framework */,
-				A700BB951EED6C69003254B0 /* Parse.framework */,
-			);
-			name = "Parse-iOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,10 +301,8 @@
 			files = (
 				A700BB8A1EE43FF2003254B0 /* HomeDatasourceController+navbar.swift in Sources */,
 				A700BB861EE361D9003254B0 /* UserCell.swift in Sources */,
-				A70881391EF22BC900DCA947 /* PDFViewController.swift in Sources */,
 				A700BB6C1EE07C1E003254B0 /* TheManna.xcdatamodeld in Sources */,
 				A700BB7B1EE0E7FA003254B0 /* HomeDatasourceController.swift in Sources */,
-				A700BBB41EEE45C7003254B0 /* ParseServerController.swift in Sources */,
 				A700BB791EE0809C003254B0 /* RootViewController.swift in Sources */,
 				A700BB821EE0F318003254B0 /* HomeDatasource.swift in Sources */,
 				A700BB641EE07C1E003254B0 /* AppDelegate.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import Bolts
-import Parse
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,21 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
         window?.rootViewController = UINavigationController(rootViewController: PDFViewController())
-        setupParseServer()
+
         return true
     }
 
-    func setupParseServer(){
-        // Initialize Parse.
-        let configuration = ParseClientConfiguration {
-            $0.applicationId = "J5vvULwtsyH9RNikdV7R3aMjR8DUUpix0d642lay"
-            $0.clientKey = "lFT0L0lKbJKGpOjgs7xklrRXoNCmLFzlccFrM8LG"
-            $0.server = "https://parseapi.back4app.com"
-        }
-        Parse.initialize(with: configuration)
-    }
-        
-        
+
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
