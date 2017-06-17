@@ -20,8 +20,9 @@
 		A700BB8A1EE43FF2003254B0 /* HomeDatasourceController+navbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB891EE43FF2003254B0 /* HomeDatasourceController+navbar.swift */; };
 		A700BB901EEB97B4003254B0 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB8F1EEB97B4003254B0 /* TweetCell.swift */; };
 		A700BB921EEC0FF4003254B0 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BB911EEC0FF4003254B0 /* Tweet.swift */; };
-		A700BBAE1EED74CA003254B0 /* AmazonClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BBAD1EED74CA003254B0 /* AmazonClientManager.swift */; };
 		A700BBB01EED76BF003254B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A700BBAF1EED76BF003254B0 /* Constants.swift */; };
+		A708813B1EF4C22D00DCA947 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A708813A1EF4C22D00DCA947 /* SignInViewController.swift */; };
+		A708813D1EF4C39600DCA947 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A708813C1EF4C39600DCA947 /* SignUpViewController.swift */; };
 		B0C838FA7C132831524DF2D4 /* Pods_TheManna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,8 +44,9 @@
 		A700BB891EE43FF2003254B0 /* HomeDatasourceController+navbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeDatasourceController+navbar.swift"; sourceTree = "<group>"; };
 		A700BB8F1EEB97B4003254B0 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		A700BB911EEC0FF4003254B0 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
-		A700BBAD1EED74CA003254B0 /* AmazonClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonClientManager.swift; sourceTree = "<group>"; };
 		A700BBAF1EED76BF003254B0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A708813A1EF4C22D00DCA947 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		A708813C1EF4C39600DCA947 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheManna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -144,8 +146,9 @@
 		A700BBAC1EED73EA003254B0 /* AWS */ = {
 			isa = PBXGroup;
 			children = (
-				A700BBAD1EED74CA003254B0 /* AmazonClientManager.swift */,
 				A700BBAF1EED76BF003254B0 /* Constants.swift */,
+				A708813A1EF4C22D00DCA947 /* SignInViewController.swift */,
+				A708813C1EF4C39600DCA947 /* SignUpViewController.swift */,
 			);
 			name = AWS;
 			sourceTree = "<group>";
@@ -273,14 +276,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A708813B1EF4C22D00DCA947 /* SignInViewController.swift in Sources */,
 				A700BB8A1EE43FF2003254B0 /* HomeDatasourceController+navbar.swift in Sources */,
 				A700BB861EE361D9003254B0 /* UserCell.swift in Sources */,
 				A700BB6C1EE07C1E003254B0 /* TheManna.xcdatamodeld in Sources */,
 				A700BB7B1EE0E7FA003254B0 /* HomeDatasourceController.swift in Sources */,
-				A700BBAE1EED74CA003254B0 /* AmazonClientManager.swift in Sources */,
 				A700BB791EE0809C003254B0 /* RootViewController.swift in Sources */,
 				A700BB821EE0F318003254B0 /* HomeDatasource.swift in Sources */,
 				A700BBB01EED76BF003254B0 /* Constants.swift in Sources */,
+				A708813D1EF4C39600DCA947 /* SignUpViewController.swift in Sources */,
 				A700BB641EE07C1E003254B0 /* AppDelegate.swift in Sources */,
 				A700BB901EEB97B4003254B0 /* TweetCell.swift in Sources */,
 				A700BB801EE0F2FA003254B0 /* UserHeaderFooter.swift in Sources */,

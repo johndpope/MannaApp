@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let rootViewController = RootViewController(collectionViewLayout: UICollectionViewFlowLayout())
 //        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         
-        window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
+        window?.rootViewController = UINavigationController(rootViewController: SignInviewController())
         return true
     }
 
