@@ -7,15 +7,26 @@
 //
 
 import LBTAComponents
-
+import AWSCognitoIdentityProvider
 
 class HomeDatasourceController: DatasourceController {
+    
+    var response: AWSCognitoIdentityUserGetDetailsResponse?
+    var user: AWSCognitoIdentityUser?
+    var pool: AWSCognitoIdentityUserPool?
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionViewLayout.invalidateLayout()
     }
     
     override func viewDidLoad() {
+        print("HomedatasourceController loaded")
+        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        if (self.user == nil) {
+            self.user = self.pool?.currentUser()
+            print(self.user?.username)
+        }
+        self.refresh()
         
         setupNavigationBarItems()
         
@@ -27,8 +38,28 @@ class HomeDatasourceController: DatasourceController {
         
     }
 
-
+    func refresh() {
+        print("refresh called")
+        
+        self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+            DispatchQueue.main.async(execute: {
+                self.response = task.result
+                self.title = self.user?.username
+                self.collectionView?.reloadData()
+            })
+            return nil
+        }
+    }
     
+    func signOut(){
+        
+        self.user?.signOut()
+        self.response = nil
+         self.title = nil
+        self.collectionView?.reloadData()
+        self.refresh()
+        
+    }
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if let user = self.datasource?.item(indexPath) as? User {

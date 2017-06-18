@@ -8,13 +8,23 @@
 
 import UIKit
 import CoreData
+import AWSCore
+import AWSCognito
+import AWSCognitoIdentityProvider
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var signInViewController: UIViewController?
-
+    var signInViewController: SignInviewController? =  {
+        let vc = SignInviewController()
+        return vc
+    }()
+    
+    lazy var navigationController: UINavigationController? = {
+        let nv = UINavigationController(rootViewController: self.signInViewController!)
+        return nv
+    }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,9 +35,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let rootViewController = RootViewController(collectionViewLayout: UICollectionViewFlowLayout())
 //        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
-        
-        window?.rootViewController = UINavigationController(rootViewController: SignInviewController())
+        setupAWS()
+        window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
         return true
+    }
+    
+    func setupAWS() {
+        // setup logging
+        AWSDDLog.sharedInstance.logLevel = .verbose
+        
+        // setup service configuration
+        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
+        
+        // create pool configuration
+        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
+                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
+                                                                        poolId: CognitoIdentityUserPoolId)
+        
+        // initialize user pool client
+        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
+        
+        // fetch the user pool client we initialized in above step
+        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        
+        pool.delegate = self
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -101,3 +132,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
+    
+    func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
+        print("Time to startPasswordAuthentification")
+        if (self.navigationController == nil) {
+            print("self.navigationControll == nil")
+            self.navigationController = UINavigationController(rootViewController: signInViewController!)
+        }
+        
+        if (self.signInViewController == nil) {
+            print("self.signInViewcontroller == nil")
+            self.signInViewController = self.navigationController?.viewControllers[0] as? SignInviewController
+        }
+        
+        DispatchQueue.main.async {
+            self.navigationController!.popToRootViewController(animated: true)
+            if (!self.navigationController!.isViewLoaded
+                || self.navigationController!.view.window == nil) {
+                print("PresentRootVieController")
+                self.window?.rootViewController?.present(self.navigationController!,
+                                                         animated: true,
+                                                         completion: nil)
+            }
+            
+        }
+        return self.signInViewController!
+    }
+    
+}

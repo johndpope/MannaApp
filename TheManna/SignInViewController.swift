@@ -8,9 +8,14 @@
 
 import Foundation
 import UIKit
+import AWSCore
+import AWSCognito
+import AWSCognitoIdentityProvider
 
 class SignInviewController: UIViewController {
     
+    var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
+    var usernameText: String?
     
     let inputsContainerView: UIView = {
         let view = UIView()
@@ -28,7 +33,7 @@ class SignInviewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        
+        button.addTarget(self, action: #selector(signInPressed), for: .touchUpInside)
         return button
     }()
     
@@ -82,6 +87,7 @@ class SignInviewController: UIViewController {
     
     override func viewDidLoad() {
         //setup your code
+        
         self.view.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         self.view.addSubview(inputsContainerView)
         self.view.addSubview(logInButton)
@@ -92,6 +98,8 @@ class SignInviewController: UIViewController {
         setupLogInButton()
         setupSignUpButton()
         setupForgetPasswordButton()
+        
+        self.navigationController?.isNavigationBarHidden = true
         
     }
     
@@ -198,6 +206,58 @@ class SignInviewController: UIViewController {
             multiplier: 1/2).isActive = true
         
     }
+    
+    func signInPressed() {
+        print(1234)
+        print(usernameTextField.text)
+        print(passwordTextField.text)
+        if (self.usernameTextField.text != nil && self.passwordTextField.text != nil) {
+            print("Usrenname and password not nils")
+            let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.usernameTextField.text!, password: self.passwordTextField.text! )
+            self.passwordAuthenticationCompletion?.set(result: authDetails)
+        } else {
+            print("There is no either password nor username")
+            let alertController = UIAlertController(title: "Missing information",
+                                                    message: "Please enter a valid user name and password",
+                                                    preferredStyle: .alert)
+            let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
+            alertController.addAction(retryAction)
+        }
+    }
 
 }
 
+extension SignInviewController: AWSCognitoIdentityPasswordAuthentication {
+    
+
+    
+    public func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput, passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
+        print("GetDetails Called")
+        self.passwordAuthenticationCompletion = passwordAuthenticationCompletionSource
+        DispatchQueue.main.async {
+            if (self.usernameTextField.text == nil) {
+                self.usernameTextField.text = authenticationInput.lastKnownUsername
+            }
+        }
+    }
+    
+    public func didCompleteStepWithError(_ error: Error?) {
+        DispatchQueue.main.async {
+            print("Some Errors when completing the step")
+            if let error = error as NSError? {
+                let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
+                                                        message: error.userInfo["message"] as? String,
+                                                        preferredStyle: .alert)
+                let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                alertController.addAction(retryAction)
+                
+                self.present(alertController, animated: true, completion:  nil)
+            } else {
+                print("Sign In Success.....")
+                self.usernameTextField.text = nil
+                self.passwordTextField.text = nil
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+}

@@ -66,6 +66,7 @@ extension HomeDatasourceController {
             composeButton.setImage(#imageLiteral(resourceName: "compose").withRenderingMode(.alwaysOriginal), for: .normal)
             composeButton.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
             composeButton.contentMode = .scaleAspectFit
+            composeButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
             let barItem2 = UIBarButtonItem(customView: composeButton)
             
             return [barItem1,barItem2]
