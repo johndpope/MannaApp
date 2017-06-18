@@ -7,9 +7,15 @@
 //
 
 import LBTAComponents
-import Parse
+import AWSCore
+import AWSCognitoIdentityProvider
 
 class HomeDatasourceController: DatasourceController {
+    
+    
+    var response: AWSCognitoIdentityUserGetDetailsResponse?
+    var user: AWSCognitoIdentityUser?
+    var pool: AWSCognitoIdentityUserPool?
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionViewLayout.invalidateLayout()
@@ -25,10 +31,31 @@ class HomeDatasourceController: DatasourceController {
         self.datasource = homeDatasource
         collectionView?.backgroundColor = UIColor.lightGray
         
-        
+        self.refresh()
+    }
+    
+    func signOut()  {
+        //signing out user
+        self.user?.signOut()
+        self.title = nil
+        self.response = nil
+        self.tableView.reloadData()
+        self.refresh()
     }
 
-    
+    func refresh()  {
+        // call the getdetail
+        self.user?.getDevice().continueOnSuccessWith { (task) -> AnyObject? in
+            
+            DispatchQueue.main.async(execute: {
+                self.response = task.result
+                self.title = self.user?.username
+                self.tableView.reloadData()
+            })
+            return nil
+        }
+        
+    }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

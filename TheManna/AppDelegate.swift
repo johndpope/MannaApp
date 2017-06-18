@@ -8,7 +8,8 @@
 
 import UIKit
 import CoreData
-import Bolts
+import AWSCore
+import AWSCognitoIdentityProvider
 
 
 @UIApplicationMain
@@ -16,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var signInViewController: UIViewController?
-
+    var navigationController: UINavigationController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         
         //window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
-        window?.rootViewController = UINavigationController(rootViewController: PDFViewController())
+        window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
 
         return true
     }
@@ -107,3 +108,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// MARK:- AWSCognitoIdentityInteractiveAuthenticationDelegate protocol delegate
+
+extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
+    
+    func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
+        if (self.navigationController == nil) {
+           
+            self.navigationController = UINavigationController(rootViewController: signInViewController)
+        }
+        
+        if (self.signInViewController == nil) {
+            self.signInViewController = self.navigationController?.viewControllers[0] as? SignInViewController
+        }
+        
+        DispatchQueue.main.async {
+            self.navigationController!.popToRootViewController(animated: true)
+            if (!self.navigationController!.isViewLoaded
+                || self.navigationController!.view.window == nil) {
+                self.window?.rootViewController?.present(self.navigationController!,
+                                                         animated: true,
+                                                         completion: nil)
+            }
+            
+        }
+        return self.signInViewController!
+    }
+}
