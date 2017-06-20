@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let rootViewController = RootViewController(collectionViewLayout: UICollectionViewFlowLayout())
 //        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         
-        //window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
         window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
 
         return true
@@ -113,9 +112,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
     
     func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
+        print("startPasswordAuthentication")
         if (self.navigationController == nil) {
-           
-            self.navigationController = UINavigationController(rootViewController: signInViewController)
+            self.navigationController = UINavigationController(rootViewController: signInViewController!)
         }
         
         if (self.signInViewController == nil) {
@@ -124,6 +123,7 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         
         DispatchQueue.main.async {
             self.navigationController!.popToRootViewController(animated: true)
+            print("pop to RootViewController")
             if (!self.navigationController!.isViewLoaded
                 || self.navigationController!.view.window == nil) {
                 self.window?.rootViewController?.present(self.navigationController!,
@@ -132,6 +132,6 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
             }
             
         }
-        return self.signInViewController!
+        return self.signInViewController! as! AWSCognitoIdentityPasswordAuthentication
     }
 }

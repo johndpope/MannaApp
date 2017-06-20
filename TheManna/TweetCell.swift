@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import LBTAComponents
-import Parse
 class TweetCell: DatasourceCell {
     
     override var datasourceItem: Any? {

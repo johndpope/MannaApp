@@ -205,9 +205,7 @@ class SignInViewController: UIViewController {
     }
     
     func signInPressed() {
-        print(1234)
-        print(usernameTextField.text)
-        print(passwordTextField.text)
+        print("SignInPressed")
         if (self.usernameTextField.text != nil && self.passwordTextField.text != nil) {
             print("Usrenname and password not nils")
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.usernameTextField.text!, password: self.passwordTextField.text! )
@@ -230,6 +228,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     
     
     func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput, passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
+        print("GetDetails Called")
             self.passwordAuthenticationCompletion = passwordAuthenticationCompletionSource
             DispatchQueue.main.async {
                 if (self.usernameText == nil) {
@@ -242,7 +241,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     func didCompleteStepWithError(_ error: Error?) {
         DispatchQueue.main.async {
             print("DidCompletestepWithError")
-            if let error = error as? NSError {
+            if let error = error as NSError? {
                 let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
                                                         message: error.userInfo["message"] as? String,
                                                         preferredStyle: .alert)
@@ -251,7 +250,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 
                 self.present(alertController, animated: true, completion:  nil)
             } else {
-                self.username.text = nil
+                self.usernameTextField.text = nil
                 self.dismiss(animated: true, completion: nil)
             }
         }

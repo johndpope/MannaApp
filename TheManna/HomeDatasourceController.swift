@@ -31,6 +31,10 @@ class HomeDatasourceController: DatasourceController {
         self.datasource = homeDatasource
         collectionView?.backgroundColor = UIColor.lightGray
         
+        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        if (self.user == nil) {
+            self.user = self.pool?.currentUser()
+        }
         self.refresh()
     }
     
@@ -39,18 +43,19 @@ class HomeDatasourceController: DatasourceController {
         self.user?.signOut()
         self.title = nil
         self.response = nil
-        self.tableView.reloadData()
+        self.collectionView?.reloadData()
         self.refresh()
     }
 
     func refresh()  {
         // call the getdetail
-        self.user?.getDevice().continueOnSuccessWith { (task) -> AnyObject? in
+        print("Refresh Called")
+        self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
             
             DispatchQueue.main.async(execute: {
                 self.response = task.result
                 self.title = self.user?.username
-                self.tableView.reloadData()
+                self.collectionView?.reloadData()
             })
             return nil
         }
