@@ -16,8 +16,18 @@ import AWSCognitoIdentityProvider
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var signInViewController: UIViewController?
-    var navigationController: UINavigationController?
+    var signInViewController: SignInViewController? =  {
+        let vc = SignInViewController()
+        return vc
+    }()
+    
+    lazy var navigationController: UINavigationController? = {
+        let nv = UINavigationController(rootViewController: self.signInViewController!)
+        return nv
+    }()
+    
+    //var signInViewController: UIViewController?
+    //var navigationController: UINavigationController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -132,6 +142,6 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
             }
             
         }
-        return self.signInViewController! as! AWSCognitoIdentityPasswordAuthentication
+        return self.signInViewController!
     }
 }
