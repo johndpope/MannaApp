@@ -24,18 +24,18 @@ class HomeDatasourceController: DatasourceController {
     override func viewDidLoad() {
 
         
+        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        if (self.user == nil) {
+            self.user = self.pool?.currentUser()
+        }
+        self.refresh()
         setupNavigationBarItems()
         
         super.viewDidLoad()
         let homeDatasource = HomeDataSource()
         self.datasource = homeDatasource
         collectionView?.backgroundColor = UIColor.lightGray
-        
-        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-        if (self.user == nil) {
-            self.user = self.pool?.currentUser()
-        }
-        self.refresh()
+
     }
     
     func signOut()  {
@@ -51,7 +51,7 @@ class HomeDatasourceController: DatasourceController {
         // call the getdetail
         print("Refresh Called")
         self.user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
-            
+            print("refresh getDetails On Success")
             DispatchQueue.main.async(execute: {
                 self.response = task.result
                 self.title = self.user?.username
