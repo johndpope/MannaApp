@@ -13,6 +13,37 @@ let tableCellID = "tID"
 
 class DDBMainTableViewController: UITableViewController {
     
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.register(DBMainTableCell.self, forCellReuseIdentifier: tableCellID)
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableCellID, for: indexPath) as! DBMainTableCell
+        
+        cell.label1.text = "Test"
+        cell.label2.text = "Label 2"
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+}
+
+class DBMainTableCell: UITableViewCell {
+    
     var label1: UILabel = { () -> UILabel in
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -29,29 +60,37 @@ class DDBMainTableViewController: UITableViewController {
         return label
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: tableCellID, for: indexPath)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubview(label1)
+        addSubview(label2)
         
-        cell.textLabel?.text = "Test "
-        reutrn cell
+        setupSubviews()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupSubviews(){
+        
+        label1.topAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        label1.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        label1.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        label1.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -30).isActive = true
+        
+        label2.topAnchor.constraint(equalTo: label1.bottomAnchor).isActive = true
+        label2.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        label2.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        label2.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -30).isActive = true
+        
+        
     }
 }
 
-class DBMainTableCell: UITableViewCell {
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        <#code#>
-    }
-}
+
+
+
+
+
+
