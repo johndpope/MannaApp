@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return nv
     }()
     
+     var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
+    
     //var signInViewController: UIViewController?
     //var navigationController: UINavigationController?
     
@@ -38,12 +40,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let rootViewController = RootViewController(collectionViewLayout: UICollectionViewFlowLayout())
 //        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
-        
+        setupAWS()
         window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
 
         return true
     }
 
+    func setupAWS() {
+        // setup logging
+        AWSDDLog.sharedInstance.logLevel = .verbose
+        
+        // setup service configuration
+        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
+        
+        // create pool configuration
+        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
+                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
+                                                                        poolId: CognitoIdentityUserPoolId)
+        
+        // initialize user pool client
+        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
+        
+        // fetch the user pool client we initialized in above step
+        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        
+        pool.delegate = self
+    }
 
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -143,5 +165,47 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
             
         }
         return self.signInViewController!
+    }
+}
+
+// MARK:- AWSCognitoIdentityRememberDevice protocol delegate
+
+extension AppDelegate: AWSCognitoIdentityRememberDevice {
+    
+    func getRememberDevice(_ rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>) {
+        self.rememberDeviceCompletionSource = rememberDeviceCompletionSource
+        DispatchQueue.main.async {
+            // dismiss the view controller being present before asking to remember device
+            self.window?.rootViewController!.presentedViewController?.dismiss(animated: true, completion: nil)
+            let alertController = UIAlertController(title: "Remember Device",
+                                                    message: "Do you want to remember this device?.",
+                                                    preferredStyle: .actionSheet)
+            
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                self.rememberDeviceCompletionSource?.set(result: true)
+            })
+            let noAction = UIAlertAction(title: "No", style: .default, handler: { (action) in
+                self.rememberDeviceCompletionSource?.set(result: false)
+            })
+            alertController.addAction(yesAction)
+            alertController.addAction(noAction)
+            
+            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func didCompleteStepWithError(_ error: Error?) {
+        DispatchQueue.main.async {
+            if let error = error as NSError? {
+                let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
+                                                        message: error.userInfo["message"] as? String,
+                                                        preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                DispatchQueue.main.async {
+                    self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
