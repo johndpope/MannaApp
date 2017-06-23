@@ -41,9 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let rootViewController = RootViewController(collectionViewLayout: UICollectionViewFlowLayout())
 //        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         setupAWS()
-        window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
+        setupDynamoDB()
+        window?.rootViewController = UINavigationController(rootViewController: DDBMainTableViewController())
 
         return true
+    }
+    
+    func setupDynamoDB(){
+        let identityPoolId = "us-east-1:fffd28eb-44c0-4f36-9432-065844b36dcb"
+        let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: identityPoolId)
+        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
     }
 
     func setupAWS() {

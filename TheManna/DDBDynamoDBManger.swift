@@ -10,6 +10,7 @@ import Foundation
 import AWSDynamoDB
 
 let AWSSampleDynamoDBTableName = "DynamoDB-OM-SwiftSample"
+let AWSScriptureTableName = "ScriptureDB"
 
 class DDBDynamoDBManager: NSObject {
     
@@ -18,7 +19,7 @@ class DDBDynamoDBManager: NSObject {
         
         // See if the test table exists.
         let describeTableInput = AWSDynamoDBDescribeTableInput()
-        describeTableInput?.tableName = AWSSampleDynamoDBTableName
+        describeTableInput?.tableName = AWSScriptureTableName
         return dynamoDB.describeTable(describeTableInput!) as! AWSTask<AnyObject>
     }
     
@@ -27,6 +28,8 @@ class DDBDynamoDBManager: NSObject {
         
         return AWSTask()
     }
+    
+    
     
 }
 
