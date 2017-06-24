@@ -34,33 +34,45 @@ class DDBMainTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(DBMainTableCell.self, forCellReuseIdentifier: tableCellID)
         
-        //fetchDynamoDB()
+        setupTable()
         //addTableRow()
+        
     }
     
-    func fetchDynamoDB() {
+    func setupTable() {
         
         DDBDynamoDBManager.describeTable().continueWith(executor: AWSExecutor.mainThread(), block: { task -> Any? in
             
-            if let error = task.error {
-                print("Error when describing the table or the table doesn't exist?")
-                print(error.localizedDescription)
+            // If the test table doesn't exist, create one.
+            if let error = task.error as NSError?, error.domain == AWSDynamoDBErrorDomain && error.code == AWSDynamoDBErrorType.resourceNotFound.rawValue {
+                self.navigationController?.present(DDBLoadingViewController(), animated: true, completion: nil)
                 
+                return DDBDynamoDBManager.createTable() .continueWith(executor: AWSExecutor.mainThread(), block: { (task:AWSTask!) -> AnyObject! in
+                    if let error = task.error as NSError? {
+                        //Handle errors.
+                        print("Error: \(error)")
+                        
+                        let alertController = UIAlertController(title: "Failed to setup a test table.", message: error.description, preferredStyle: UIAlertControllerStyle.alert)
+                        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+                        alertController.addAction(okAction)
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                    } else {
+                        self.dismiss(animated: false, completion: nil)
+                    }
+                    
+                    return nil
+                    
+                })
             } else {
-                print("Successful describe Table")
-                let resultTask = task as! AWSTask<AWSDynamoDBDescribeTableOutput>
-                if let tableName = resultTask.result?.table?.tableName {
-                    print("printing tableName")
-                    print(tableName)
-                    self.refreshList()
-                }
-                
+                //load table contents
+                self.refreshList(true)
             }
             return nil
         })
     }
     
-    func refreshList()  {
+    func refreshList(_ startFromBegining: Bool)  {
         //
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         let queryExpression = AWSDynamoDBScanExpression()

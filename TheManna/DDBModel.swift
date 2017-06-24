@@ -27,6 +27,8 @@ class DDBModel: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         return "reference"
     }
     
-
+    static func rangeKeyAttribute() -> String {
+        return "book"
+    }
     
 }
