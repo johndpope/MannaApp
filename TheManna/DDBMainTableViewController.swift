@@ -15,17 +15,21 @@ class DDBMainTableViewController: UITableViewController {
     
     var scriptures: [DDBModel] = {
         let scriptOne = DDBModel()
+        scriptOne?.reference = "romans:3-21"
         scriptOne?.book = "Romans"
         scriptOne?.chapter = 3
         scriptOne?.verse = 21
         scriptOne?.topic = "Prayer"
         scriptOne?.body = "But now the righteousness of God has been manifested apart from the law, although the Law and the Prophets near witness to it"
+        scriptOne?.imageURL = "https://s3.amazonaws.com/scripturebucket/IMG_2403.jpg"
         let scriptTwo = DDBModel()
+        scriptTwo?.reference = "ephesians:2-15"
         scriptTwo?.book = "Ephesians"
         scriptTwo?.chapter = 2
         scriptTwo?.verse = 15
         scriptTwo?.topic = "Praise"
         scriptTwo?.body = "By abolishing the law of commandments expressed in ordinances, that he might create in himself one new man in place of the two, so making peace."
+        scriptTwo?.imageURL = "https://s3.amazonaws.com/scripturebucket/IMG_2403.jpg"
         
         return [scriptOne!, scriptTwo!]
     }()
@@ -35,6 +39,7 @@ class DDBMainTableViewController: UITableViewController {
         tableView.register(DBMainTableCell.self, forCellReuseIdentifier: tableCellID)
         
         setupTable()
+        DDBDynamoDBManager.insertItem(scriptures[0])
         //addTableRow()
         
     }
@@ -66,6 +71,7 @@ class DDBMainTableViewController: UITableViewController {
                 })
             } else {
                 //load table contents
+                print("Refreshing List because table already exist")
                 self.refreshList(true)
             }
             return nil

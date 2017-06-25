@@ -18,7 +18,8 @@ class DDBModel: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var verse: Int?
     var body: String?
     var reference: String?
-
+    var imageURL: String?
+    
     static func dynamoDBTableName() -> String {
         return "ScriptureDB"
     }

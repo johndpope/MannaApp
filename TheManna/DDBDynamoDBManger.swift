@@ -61,6 +61,10 @@ class DDBDynamoDBManager: NSObject {
         topicAttributeDefinition?.attributeName = "topic"
         topicAttributeDefinition?.attributeType = .S
         
+        let imageURLAttributeDefinition = AWSDynamoDBAttributeDefinition()
+        imageURLAttributeDefinition?.attributeName = "imageURL"
+        imageURLAttributeDefinition?.attributeType = .S
+        
         let provisionedThroughput = AWSDynamoDBProvisionedThroughput()
         provisionedThroughput?.writeCapacityUnits = 5
         provisionedThroughput?.readCapacityUnits = 5
@@ -94,7 +98,7 @@ class DDBDynamoDBManager: NSObject {
         // Create Table 
         let createTableInput = AWSDynamoDBCreateTableInput()
         createTableInput?.tableName = AWSScriptureTableName
-        createTableInput?.attributeDefinitions = [hashKeyAttributeDefinition!, rangeKeyAttributeDefinition!, chapterAttributeDefinition!, verseAttributeDefinition!, bodyAttributeDefinition!, topicAttributeDefinition!]
+        createTableInput?.attributeDefinitions = [hashKeyAttributeDefinition!, rangeKeyAttributeDefinition!, chapterAttributeDefinition!, verseAttributeDefinition!, topicAttributeDefinition!]
         createTableInput?.keySchema = [hashKeySchemaElement!, rangeKeySchemaElement!]
         createTableInput?.provisionedThroughput = provisionedThroughput
         createTableInput?.globalSecondaryIndexes = gsiArray
@@ -134,8 +138,22 @@ class DDBDynamoDBManager: NSObject {
         
     }
     
-    class func generateTestData() {
+    class func insertItem(_ model: DDBModel) {
+        print("Inserting an item right now.......")
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
+        dynamoDBObjectMapper.save(model).continueWith(executor: AWSExecutor.mainThread(), block: { (task: AWSTask<AnyObject>) -> Any? in
+                if let err = task.error {
+                    print("Error Occured saving the model")
+                    print(err.localizedDescription)
+                    print(err)
+                } else {
+                    print("Successfully added the mode")
+                    let item = model
+                    print(item.reference ?? "No Reference in model being inserted")
+                }
+                return nil
+        })
     }
 }
 
