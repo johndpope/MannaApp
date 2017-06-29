@@ -8,23 +8,27 @@
 
 import Foundation
 import LBTAComponents
-class HomeDataSource: Datasource {
-    
-    
-    
-    
+import SwiftyJSON
+import TRON
 
+class HomeDataSource: Datasource, JSONDecodable {
     
-    let users: [User] = {
+    
+    let users: [User]
+    
+    required init(json: JSON) throws {
+        var users = [User]()
         
-        let brianUser = User(name: "Sean Zhang", username: "@sean7218", bioText: "For the wages of sin is death and the free gift of God is eternal life in Christ Jesus.", profileImage: #imageLiteral(resourceName: "selfie"))
-        
-        let rayUser = User(name: "Ray Wenderlich", username: "@rwenderlich", bioText: "For All have sinned and fall short of the glory of God.", profileImage: #imageLiteral(resourceName: "rwenderlich"))
-        
-        let kindleCourseUser = User(name: "Brian Vooon", username: "@BrianVoong", bioText: "21 But now the righteousness of God has been manifested apart from the law, although the Law and the Prophets bear witness to it— 22 the righteousness of God through faith in Jesus Christ for all who believe. For there is no distinction: 23 for all have sinned and fall short of the glory of God, 24 and are justified by his grace as a gift, through the redemption that is in Christ Jesus, 25 whom God put forward as a propitiation by his blood, to be received by faith. This was to show God's righteousness, because in his divine forbearance he had passed over former sins. 26 It was to show his righteousness at the present time, so that he might be just and the justifier of the one who has faith in Jesus.", profileImage: #imageLiteral(resourceName: "brianVoong"))
-        
-        return [brianUser, rayUser, kindleCourseUser]
-    }()
+        let array = json["users"].array
+        for userJson in array! {
+            let name = userJson["name"].stringValue
+            let username = userJson["username"].stringValue
+            let bio = userJson["bio"].stringValue
+            let user = User(name: name, username: username, bioText: bio, profileImage: UIImage())
+            users.append(user)
+        }
+        self.users = users
+    }
     
     let tweets: [Tweet] = {
         let brianUser = User(name: "Sean Zhang", username: "@sean7218", bioText: "For the wages of sin is death and the free gift of God is eternal life in Christ Jesus.", profileImage: #imageLiteral(resourceName: "selfie"))
