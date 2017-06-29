@@ -24,11 +24,6 @@ class HomeDatasourceController: DatasourceController {
     override func viewDidLoad() {
 
         
-        self.pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-        if (self.user == nil) {
-            self.user = self.pool?.currentUser()
-        }
-        self.refresh()
         setupNavigationBarItems()
         
         super.viewDidLoad()
