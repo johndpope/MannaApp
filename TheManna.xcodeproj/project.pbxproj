@@ -39,6 +39,7 @@
 		A708814C1EFC5CCB00DCA947 /* DDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A708814B1EFC5CCB00DCA947 /* DDBModel.swift */; };
 		A70881511EFD4E0700DCA947 /* IdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881501EFD4E0700DCA947 /* IdentityProvider.swift */; };
 		A70881531EFE7E9700DCA947 /* DDBLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881521EFE7E9700DCA947 /* DDBLoadingViewController.swift */; };
+		A70881AC1F05CB8D00DCA947 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881AB1F05CB8D00DCA947 /* Service.swift */; };
 		B0C838FA7C132831524DF2D4 /* Pods_TheManna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		A708814B1EFC5CCB00DCA947 /* DDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDBModel.swift; sourceTree = "<group>"; };
 		A70881501EFD4E0700DCA947 /* IdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityProvider.swift; sourceTree = "<group>"; };
 		A70881521EFE7E9700DCA947 /* DDBLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDBLoadingViewController.swift; sourceTree = "<group>"; };
+		A70881AB1F05CB8D00DCA947 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheManna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -134,6 +136,7 @@
 		A700BB571EE07C1E003254B0 = {
 			isa = PBXGroup;
 			children = (
+				A70881AA1F05CB7900DCA947 /* Service */,
 				A700BB621EE07C1E003254B0 /* TheManna */,
 				A700BB611EE07C1E003254B0 /* Products */,
 				5DC62B4D4EE4EF5F144847B2 /* Pods */,
@@ -233,6 +236,14 @@
 			children = (
 			);
 			name = S3;
+			sourceTree = "<group>";
+		};
+		A70881AA1F05CB7900DCA947 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				A70881AB1F05CB8D00DCA947 /* Service.swift */,
+			);
+			name = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +377,7 @@
 				A70881481EFB5CFD00DCA947 /* DDBDynamoDBManger.swift in Sources */,
 				A700BB7B1EE0E7FA003254B0 /* HomeDatasourceController.swift in Sources */,
 				A70881461EF6BF8C00DCA947 /* Constants.swift in Sources */,
+				A70881AC1F05CB8D00DCA947 /* Service.swift in Sources */,
 				A700BB791EE0809C003254B0 /* RootViewController.swift in Sources */,
 				A700BB821EE0F318003254B0 /* HomeDatasource.swift in Sources */,
 				A700BB641EE07C1E003254B0 /* AppDelegate.swift in Sources */,
