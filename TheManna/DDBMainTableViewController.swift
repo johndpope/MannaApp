@@ -8,10 +8,16 @@
 
 import Foundation
 import AWSDynamoDB
+import AWSCognito
+import AWSCognitoIdentityProvider
 
 let tableCellID = "tID"
 
 class DDBMainTableViewController: UITableViewController {
+    
+    var response: AWSCognitoIdentityUserGetDetailsResponse?
+    var user: AWSCognitoIdentityUser?
+    var pool: AWSCognitoIdentityUserPool?
     
     var scriptures: [DDBModel] = {
         let scriptOne = DDBModel()
@@ -34,16 +40,43 @@ class DDBMainTableViewController: UITableViewController {
         return [scriptOne!, scriptTwo!]
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(DBMainTableCell.self, forCellReuseIdentifier: tableCellID)
+        setupNavigationBar()
+        self.pool = AWSCognitoIdentityUserPool(forKey: "UserPool")
+        if self.user == nil {
+            self.user = self.pool?.currentUser()
+        }
         
-        setupTable()
-        DDBDynamoDBManager.insertItem(scriptures[0])
+        self.refresh()
+        
+        //setupTable()
         //addTableRow()
         
     }
     
+    func refresh() {
+        self.user?.getDetails().continueOnSuccessWith(block: { (task: AWSTask<AWSCognitoIdentityUserGetDetailsResponse>) -> Any? in
+            DispatchQueue.main.async {
+                self.response = task.result
+                self.tableView.reloadData()
+            }
+            
+            return nil
+        })
+    }
+    
+    func setupNavigationBar(){
+ 
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(signOut))
+        self.navigationItem.setRightBarButton(barButtonItem, animated: true)
+    }
+    
+    func signOut() {
+        print("Signout")
+    }
     func setupTable() {
         
         DDBDynamoDBManager.describeTable().continueWith(executor: AWSExecutor.mainThread(), block: { task -> Any? in

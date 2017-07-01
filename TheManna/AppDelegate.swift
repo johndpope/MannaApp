@@ -16,7 +16,7 @@ import AWSCognitoIdentityProvider
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var signInViewController: SignInViewController? =  {
+    lazy var signInViewController: SignInViewController? =  {
         let vc = SignInViewController()
         return vc
     }()
@@ -33,40 +33,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+        window?.rootViewController = UINavigationController(rootViewController: DDBMainTableViewController())
+        setupAWS()
         
-        //setupAWS()
-        //setupDynamoDB()
-        window?.rootViewController = UINavigationController(rootViewController: HomeDatasourceController())
 
         return true
     }
     
     func setupDynamoDB(){
-        let identityPoolId = "us-east-1:fffd28eb-44c0-4f36-9432-065844b36dcb"
-        let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: identityPoolId)
+        
+        let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: vvaultIdentityPoolId)
         let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
     }
 
+    
     func setupAWS() {
         // setup logging
         AWSDDLog.sharedInstance.logLevel = .verbose
         
-        // setup service configuration
-        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
+        let serviceConfiguration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: nil)
         
-        // create pool configuration
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
-                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
-                                                                        poolId: CognitoIdentityUserPoolId)
+        let userPoolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
+                                                                            clientSecret: CognitoIdentityUserPoolAppClientSecret,
+                                                                            poolId: CognitoIdentityUserPoolId)
         
-        // initialize user pool client
-        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
+        AWSCognitoIdentityUserPool.register(with: serviceConfiguration,
+                                            userPoolConfiguration: userPoolConfiguration,
+                                            forKey: "UserPool")
         
-        // fetch the user pool client we initialized in above step
-        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        let pool = AWSCognitoIdentityUserPool(forKey: "UserPool")
+        
+        
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1,
+                                                                identityPoolId: vvaultIdentityPoolId,
+                                                                identityProviderManager:pool)
         
         pool.delegate = self
+        
+        credentialsProvider.getIdentityId().continueWith { (task: AWSTask<NSString>) -> Any? in
+            if let err = task.error { print("error getIdentityID: \n \n \t\(err)") } else {
+                let result = task.result
+                print(result ?? "Nothing was found for the identity")
+                //pool.currentUser()?.signOut()
+                //credentialsProvider.clearCredentials()
+                credentialsProvider.clearKeychain()
+            }
+            return nil
+        }
+        
+       
+      
     }
 
     
@@ -148,10 +165,12 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
     func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
         print("startPasswordAuthentication")
         if (self.navigationController == nil) {
+            print("Creating signInViewController and assigning it to the root of navigation controller")
             self.navigationController = UINavigationController(rootViewController: signInViewController!)
         }
         
         if (self.signInViewController == nil) {
+            print("signInViewcontrool is nil and now get to he zero controller")
             self.signInViewController = self.navigationController?.viewControllers[0] as? SignInViewController
         }
         
@@ -160,6 +179,7 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
             print("pop to RootViewController")
             if (!self.navigationController!.isViewLoaded
                 || self.navigationController!.view.window == nil) {
+                print("navigationController view is not loaded and navigationController view window is nil")
                 self.window?.rootViewController?.present(self.navigationController!,
                                                          animated: true,
                                                          completion: nil)

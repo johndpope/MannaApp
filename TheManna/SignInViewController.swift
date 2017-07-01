@@ -206,10 +206,12 @@ class SignInViewController: UIViewController {
     
     func signInPressed() {
         print("SignInPressed")
+        
         if (self.usernameTextField.text != nil && self.passwordTextField.text != nil) {
-            print("Usrenname and password not nils")
+            print("Usrenname and password all good")
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.usernameTextField.text!, password: self.passwordTextField.text! )
             self.passwordAuthenticationCompletion?.set(result: authDetails)
+            print(1)
         } else {
             print("There is no either password nor username")
             let alertController = UIAlertController(title: "Missing information",
@@ -228,7 +230,8 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     
     
     func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput, passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
-        print("GetDetails Called")
+        print(2.2)
+        print("GetDetails function Called")
             self.passwordAuthenticationCompletion = passwordAuthenticationCompletionSource
             DispatchQueue.main.async {
                 if (self.usernameText == nil) {
@@ -239,9 +242,10 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     
     
     func didCompleteStepWithError(_ error: Error?) {
+        print(2.1)
         DispatchQueue.main.async {
-            print("DidCompletestepWithError")
             if let error = error as NSError? {
+                print("DidCompletestepWithError --- Error Found")
                 let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
                                                         message: error.userInfo["message"] as? String,
                                                         preferredStyle: .alert)
@@ -250,6 +254,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 
                 self.present(alertController, animated: true, completion:  nil)
             } else {
+                print("DidCompleteStep - WithoutError")
                 self.usernameTextField.text = nil
                 self.dismiss(animated: true, completion: nil)
             }
