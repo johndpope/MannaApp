@@ -17,18 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     lazy var signInViewController: SignInViewController? =  {
-        let vc = SignInViewController()
-        return vc
+        let viewController = SignInViewController()
+        return viewController
     }()
     
     lazy var mainTableViewController: DDBMainTableViewController? = {
-        let hvController = DDBMainTableViewController()
-        return hvController
+        let viewController = DDBMainTableViewController()
+        return viewController
     }()
     
-    lazy var navigationController: UINavigationController? = {
-        let nv = UINavigationController(rootViewController: self.mainTableViewController!)
-        return nv
+    lazy var mainTableNavigationController: UINavigationController? = {
+        let navigationController = UINavigationController(rootViewController: self.mainTableViewController!)
+        return navigationController
+    }()
+    
+    lazy var signInNavigationController: UINavigationController? = {
+        let navigationController = UINavigationController(rootViewController: self.signInViewController!)
+        return navigationController
     }()
     
 
@@ -40,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = navigationController
+        window?.rootViewController = mainTableNavigationController
+        UINavigationBar.appearance().tintColor = .white
         
         setupAWS()
         
@@ -79,16 +85,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         pool.delegate = self
         
-        credentialsProvider.getIdentityId().continueWith { (task: AWSTask<NSString>) -> Any? in
-            if let err = task.error { print("error getIdentityID: \n \n \t\(err)") } else {
-                let result = task.result
-                print(result ?? "Nothing was found for the identity")
-            }
-            return nil
-        }
-        
-        print("Current User Signed In Already?")
-        print(pool.currentUser()?.isSignedIn as Any)
+//        credentialsProvider.getIdentityId().continueWith { (task: AWSTask<NSString>) -> Any? in
+//            if let err = task.error { print("error getIdentityID: \n \n \t\(err)") } else {
+//                let result = task.result
+//                print(result ?? "Nothing was found for the identity")
+//            }
+//            return nil
+//        }
+//        
+//        print("Current User Signed In Already?")
+//        print(pool.currentUser()?.isSignedIn as Any)
        
       
     }
@@ -175,7 +181,8 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         DispatchQueue.main.async {
             
             print("present SignInViewController")
-            self.navigationController?.present(self.signInViewController!, animated: true, completion: nil)
+            
+            self.window?.rootViewController?.present(self.signInNavigationController!, animated: false, completion: nil)
             
         }
         return self.signInViewController!

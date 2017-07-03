@@ -37,18 +37,7 @@ class ForgotPasswordViewController: UIViewController {
         return button
     }()
     
-    lazy var cancelForgotPasswordButton: UIButton = {
-        let button = UIButton(type: UIButtonType.system)
-        button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Cancel", for: .normal)
-        button.contentHorizontalAlignment = .right
-        button.contentEdgeInsets = UIEdgeInsetsMake(10, 0, 10, 10)
-        button.addTarget(self, action: #selector(cancelForgotPassword), for: .touchUpInside)
-        return button
-    }()
+
     
     lazy var contactUsButton: UIButton = {
         let button = UIButton(type: UIButtonType.system)
@@ -78,7 +67,6 @@ class ForgotPasswordViewController: UIViewController {
         self.view.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         self.view.addSubview(usernameTextField)
         self.view.addSubview(forgotPasswordButton)
-        self.view.addSubview(cancelForgotPasswordButton)
         self.view.addSubview(contactUsButton)
         
         //Needs x, y, width, and height constrains
@@ -93,17 +81,11 @@ class ForgotPasswordViewController: UIViewController {
         forgotPasswordButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -150).isActive = true
         forgotPasswordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        //Needs x, y, width, and height constrains
-        let size1 = NSString(string: "Cancel").size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 11)])
-        cancelForgotPasswordButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        cancelForgotPasswordButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        cancelForgotPasswordButton.widthAnchor.constraint(equalToConstant: size1.width + 20).isActive = true
-        cancelForgotPasswordButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         
         //Needs x, y, width, and height constrains
         let size2 = NSString(string: "Contact Us").size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 11)])
         contactUsButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        contactUsButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        contactUsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         contactUsButton.widthAnchor.constraint(equalToConstant: size2.width + 20).isActive = true
         contactUsButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
@@ -145,9 +127,6 @@ class ForgotPasswordViewController: UIViewController {
         })
     }
     
-    func cancelForgotPassword() {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     func contactUsButtonPressed() {
         let alertController = UIAlertController(title: "Contact Us",

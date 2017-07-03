@@ -113,6 +113,17 @@ class SignInViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationController()
+        self.navigationController?.isNavigationBarHidden = true
+        
+    }
+    
+    func setupNavigationController() {
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+    }
+    
     func setupLogInButton() {
         //need x, y, width, height constraints
         logInButton.centerXAnchor.constraint(
@@ -240,13 +251,14 @@ class SignInViewController: UIViewController {
 
     func segueToForgotPasswordViewController(){
         print("going to forgotPasswordViewController now")
+        self.navigationController?.pushViewController(self.forgotPasswordViewController!, animated: true)
         
-        self.present(forgotPasswordViewController!, animated: true, completion: nil)
     }
     
     func segueToSignUpViewController(){
         print("going to signUpViewController now")
-        self.present(signUpViewController!, animated: true, completion: nil)
+        self.navigationController?.pushViewController(self.signUpViewController!, animated: true)
+        
     }
 }
 
@@ -283,9 +295,8 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
             } else {
                 print("DidCompleteStep - WithoutError")
                 self.usernameTextField.text = nil
-                print(self.navigationController?.viewControllers.count ?? "ZEROOOOOO ViewControllers")
-                //self.navigationController?.popViewController(animated: true)
-                //self.navigationController?.isNavigationBarHidden = false
+                
+                
                 self.dismiss(animated: true, completion: nil)
             }
         }
