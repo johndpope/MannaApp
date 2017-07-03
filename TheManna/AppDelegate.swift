@@ -21,10 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return vc
     }()
     
+    lazy var mainTableViewController: DDBMainTableViewController? = {
+        let hvController = DDBMainTableViewController()
+        return hvController
+    }()
+    
     lazy var navigationController: UINavigationController? = {
-        let nv = UINavigationController(rootViewController: self.signInViewController!)
+        let nv = UINavigationController(rootViewController: self.mainTableViewController!)
         return nv
     }()
+    
+
     
      var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
     
@@ -33,7 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: DDBMainTableViewController())
+        window?.rootViewController = navigationController
+        
         setupAWS()
         
 
@@ -75,13 +83,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let err = task.error { print("error getIdentityID: \n \n \t\(err)") } else {
                 let result = task.result
                 print(result ?? "Nothing was found for the identity")
-                //pool.currentUser()?.signOut()
-                //credentialsProvider.clearCredentials()
-                credentialsProvider.clearKeychain()
             }
             return nil
         }
         
+        print("Current User Signed In Already?")
+        print(pool.currentUser()?.isSignedIn as Any)
        
       
     }
@@ -164,26 +171,11 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
     
     func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
         print("startPasswordAuthentication")
-        if (self.navigationController == nil) {
-            print("Creating signInViewController and assigning it to the root of navigation controller")
-            self.navigationController = UINavigationController(rootViewController: signInViewController!)
-        }
-        
-        if (self.signInViewController == nil) {
-            print("signInViewcontrool is nil and now get to he zero controller")
-            self.signInViewController = self.navigationController?.viewControllers[0] as? SignInViewController
-        }
-        
+
         DispatchQueue.main.async {
-            self.navigationController!.popToRootViewController(animated: true)
-            print("pop to RootViewController")
-            if (!self.navigationController!.isViewLoaded
-                || self.navigationController!.view.window == nil) {
-                print("navigationController view is not loaded and navigationController view window is nil")
-                self.window?.rootViewController?.present(self.navigationController!,
-                                                         animated: true,
-                                                         completion: nil)
-            }
+            
+            print("present SignInViewController")
+            self.navigationController?.present(self.signInViewController!, animated: true, completion: nil)
             
         }
         return self.signInViewController!

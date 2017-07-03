@@ -50,7 +50,7 @@ class DDBMainTableViewController: UITableViewController {
             self.user = self.pool?.currentUser()
         }
         
-        self.refresh()
+       self.refresh()
         
         //setupTable()
         //addTableRow()
@@ -61,6 +61,8 @@ class DDBMainTableViewController: UITableViewController {
         self.user?.getDetails().continueOnSuccessWith(block: { (task: AWSTask<AWSCognitoIdentityUserGetDetailsResponse>) -> Any? in
             DispatchQueue.main.async {
                 self.response = task.result
+                print("getDetail in TableView Called")
+                print(self.response.debugDescription)
                 self.tableView.reloadData()
             }
             
@@ -71,11 +73,21 @@ class DDBMainTableViewController: UITableViewController {
     func setupNavigationBar(){
  
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(signOut))
+        let barButtonItem2 = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
+        let barButtonItem3 = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItem))
         self.navigationItem.setRightBarButton(barButtonItem, animated: true)
     }
     
+    func addItem() {
+        
+    }
     func signOut() {
         print("Signout")
+        user?.signOut()
+        response = nil
+        pool?.clearAll()
+        self.refresh()
+        tableView.reloadData()
     }
     func setupTable() {
         

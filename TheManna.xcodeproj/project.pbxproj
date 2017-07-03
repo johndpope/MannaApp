@@ -40,6 +40,9 @@
 		A70881511EFD4E0700DCA947 /* IdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881501EFD4E0700DCA947 /* IdentityProvider.swift */; };
 		A70881531EFE7E9700DCA947 /* DDBLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881521EFE7E9700DCA947 /* DDBLoadingViewController.swift */; };
 		A70881AC1F05CB8D00DCA947 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881AB1F05CB8D00DCA947 /* Service.swift */; };
+		A76CE9D01F0A95F8001E58B8 /* MFAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9CF1F0A95F8001E58B8 /* MFAViewController.swift */; };
+		A76CE9D21F0A9625001E58B8 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D11F0A9625001E58B8 /* ForgotPasswordViewController.swift */; };
+		A76CE9D41F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */; };
 		B0C838FA7C132831524DF2D4 /* Pods_TheManna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +84,9 @@
 		A70881501EFD4E0700DCA947 /* IdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityProvider.swift; sourceTree = "<group>"; };
 		A70881521EFE7E9700DCA947 /* DDBLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDBLoadingViewController.swift; sourceTree = "<group>"; };
 		A70881AB1F05CB8D00DCA947 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		A76CE9CF1F0A95F8001E58B8 /* MFAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFAViewController.swift; sourceTree = "<group>"; };
+		A76CE9D11F0A9625001E58B8 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheManna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -204,9 +210,6 @@
 				A708814F1EFD3B7300DCA947 /* S3 */,
 				A708814E1EFD3B5900DCA947 /* Cognito */,
 				A708814D1EFD3B4300DCA947 /* DynamoDB */,
-				A708813F1EF6BC8200DCA947 /* SignInViewController.swift */,
-				A70881411EF6BF3300DCA947 /* SignUpViewController.swift */,
-				A70881431EF6BF7600DCA947 /* ConfirmSignUpViewController.swift */,
 				A70881451EF6BF8C00DCA947 /* Constants.swift */,
 			);
 			name = AWS;
@@ -227,6 +230,12 @@
 			isa = PBXGroup;
 			children = (
 				A70881501EFD4E0700DCA947 /* IdentityProvider.swift */,
+				A708813F1EF6BC8200DCA947 /* SignInViewController.swift */,
+				A70881411EF6BF3300DCA947 /* SignUpViewController.swift */,
+				A70881431EF6BF7600DCA947 /* ConfirmSignUpViewController.swift */,
+				A76CE9D11F0A9625001E58B8 /* ForgotPasswordViewController.swift */,
+				A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */,
+				A76CE9CF1F0A95F8001E58B8 /* MFAViewController.swift */,
 			);
 			name = Cognito;
 			sourceTree = "<group>";
@@ -370,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A700BB8A1EE43FF2003254B0 /* HomeDatasourceController+navbar.swift in Sources */,
+				A76CE9D21F0A9625001E58B8 /* ForgotPasswordViewController.swift in Sources */,
 				A70881441EF6BF7600DCA947 /* ConfirmSignUpViewController.swift in Sources */,
 				A700BB861EE361D9003254B0 /* UserCell.swift in Sources */,
 				A700BB6C1EE07C1E003254B0 /* TheManna.xcdatamodeld in Sources */,
@@ -386,8 +396,10 @@
 				A700BB801EE0F2FA003254B0 /* UserHeaderFooter.swift in Sources */,
 				A70881531EFE7E9700DCA947 /* DDBLoadingViewController.swift in Sources */,
 				A70881511EFD4E0700DCA947 /* IdentityProvider.swift in Sources */,
+				A76CE9D01F0A95F8001E58B8 /* MFAViewController.swift in Sources */,
 				A700BB841EE35871003254B0 /* User.swift in Sources */,
 				A708814A1EFB5F0300DCA947 /* DDBMainTableViewController.swift in Sources */,
+				A76CE9D41F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift in Sources */,
 				A70881421EF6BF3300DCA947 /* SignUpViewController.swift in Sources */,
 				A700BB921EEC0FF4003254B0 /* Tweet.swift in Sources */,
 			);

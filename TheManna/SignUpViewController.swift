@@ -13,43 +13,56 @@ class SignUpViewController: UIViewController {
     
     
     let usernameTextField: UITextField = {
-        let tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "user name"
-        return tf
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "user name"
+        textField.autocapitalizationType = .none
+        return textField
         
     }()
     
     let passwordTextField: UITextField = {
-        let tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "password"
-        return tf
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "password"
+        return textField
         
     }()
     
     let emailTextField: UITextField = {
-        let tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "email"
-        return tf
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "email"
+        return textField
         
     }()
     
     let phoneTextField: UITextField = {
-        let tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "phone number"
-        return tf
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "phone number"
+        return textField
         
+    }()
+    
+    let signUpButton: UIButton = {
+        let button = UIButton(type: UIButtonType.system)
+        button.setTitle("Sign Up", for: .normal)
+        button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
+        return button
     }()
     
     override func viewDidLoad() {
         //setup view here
-        view.addSubview(usernameTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(emailTextField)
-        view.addSubview(phoneTextField)
+        self.view.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        self.view.addSubview(usernameTextField)
+        self.view.addSubview(passwordTextField)
+        self.view.addSubview(emailTextField)
+        self.view.addSubview(phoneTextField)
+        self.view.addSubview(signUpButton)
         
         setupViews()
     }
@@ -79,5 +92,10 @@ class SignUpViewController: UIViewController {
         phoneTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         phoneTextField.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -100).isActive = true
         phoneTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        signUpButton.topAnchor.constraint(equalTo: phoneTextField.bottomAnchor, constant: 10).isActive = true
+        signUpButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        signUpButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -100).isActive = true
+        signUpButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }

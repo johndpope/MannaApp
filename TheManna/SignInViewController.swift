@@ -11,8 +11,17 @@ import AWSCore
 import AWSCognitoIdentityProvider
 
 class SignInViewController: UIViewController {
+    
     var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
     var usernameText: String?
+    
+    lazy var forgotPasswordViewController: ForgotPasswordViewController? = {
+        return ForgotPasswordViewController()
+    }()
+    
+    lazy var signUpViewController: SignUpViewController? = {
+        return SignUpViewController()
+    }()
     
     let inputsContainerView: UIView = {
         let view = UIView()
@@ -40,19 +49,23 @@ class SignInViewController: UIViewController {
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
+        button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        button.addTarget(self, action: #selector(segueToSignUpViewController), for: .touchUpInside)
         return button
     }()
     
-    lazy var forgetPasswordButton: UIButton = {
+    lazy var forgotPasswordButton: UIButton = {
         let button = UIButton(type: UIButtonType.system)
         button.setTitle("Forget Password", for: UIControlState.normal)
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        
+        button.contentHorizontalAlignment = .right
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
+        button.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        button.addTarget(self, action: #selector(segueToForgotPasswordViewController), for: .touchUpInside)
         return button
     }()
     
@@ -89,7 +102,7 @@ class SignInViewController: UIViewController {
         self.view.addSubview(inputsContainerView)
         self.view.addSubview(logInButton)
         self.view.addSubview(SignUpButton)
-        self.view.addSubview(forgetPasswordButton)
+        self.view.addSubview(forgotPasswordButton)
         
         setupInputContainerView()
         setupLogInButton()
@@ -115,28 +128,31 @@ class SignInViewController: UIViewController {
     
     func setupSignUpButton() {
         //need x, y, width, height constraints
+        
+        let size = NSString(string: "Sign Up").size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 11)])
         SignUpButton.bottomAnchor.constraint(
             equalTo: view.bottomAnchor).isActive = true
         SignUpButton.leftAnchor.constraint(
             equalTo: view.leftAnchor, constant: 0).isActive = true
         SignUpButton.widthAnchor.constraint(
-            equalToConstant: 100).isActive = true
+            equalToConstant: size.width + 25).isActive = true
         SignUpButton.heightAnchor.constraint(
-            equalToConstant: 50).isActive = true
+            equalToConstant: size.height + 20).isActive = true
         
         
     }
     
     func setupForgetPasswordButton() {
         //need x, y, width, height constraints
-        forgetPasswordButton.bottomAnchor.constraint(
+        let size = NSString(string: " Forget Password ").size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 11)])
+        forgotPasswordButton.bottomAnchor.constraint(
             equalTo: view.bottomAnchor).isActive = true
-        forgetPasswordButton.rightAnchor.constraint(
+        forgotPasswordButton.rightAnchor.constraint(
             equalTo: view.rightAnchor, constant: 0).isActive = true
-        forgetPasswordButton.widthAnchor.constraint(
-            equalToConstant: 100).isActive = true
-        forgetPasswordButton.heightAnchor.constraint(
-            equalToConstant: 50).isActive = true
+        forgotPasswordButton.widthAnchor.constraint(
+            equalToConstant: size.width + 20).isActive = true
+        forgotPasswordButton.heightAnchor.constraint(
+            equalToConstant: size.height + 20).isActive = true
         
         
     }
@@ -222,6 +238,16 @@ class SignInViewController: UIViewController {
         }
     }
 
+    func segueToForgotPasswordViewController(){
+        print("going to forgotPasswordViewController now")
+        
+        self.present(forgotPasswordViewController!, animated: true, completion: nil)
+    }
+    
+    func segueToSignUpViewController(){
+        print("going to signUpViewController now")
+        self.present(signUpViewController!, animated: true, completion: nil)
+    }
 }
 
 
@@ -234,6 +260,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
         print("GetDetails function Called")
             self.passwordAuthenticationCompletion = passwordAuthenticationCompletionSource
             DispatchQueue.main.async {
+                print(2.3)
                 if (self.usernameText == nil) {
                     self.usernameText = authenticationInput.lastKnownUsername
                 }
@@ -242,7 +269,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     
     
     func didCompleteStepWithError(_ error: Error?) {
-        print(2.1)
+        print(3.1)
         DispatchQueue.main.async {
             if let error = error as NSError? {
                 print("DidCompletestepWithError --- Error Found")
@@ -256,6 +283,9 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
             } else {
                 print("DidCompleteStep - WithoutError")
                 self.usernameTextField.text = nil
+                print(self.navigationController?.viewControllers.count ?? "ZEROOOOOO ViewControllers")
+                //self.navigationController?.popViewController(animated: true)
+                //self.navigationController?.isNavigationBarHidden = false
                 self.dismiss(animated: true, completion: nil)
             }
         }

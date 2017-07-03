@@ -11,28 +11,48 @@ import AWSCognitoIdentityProvider
 
 class ConfirmSignUpViewController: UIViewController {
     
-    let confirmCodeTextField: UITextField = {
-        let tf = UITextField()
-        tf.backgroundColor = .red
-        tf.placeholder = "Confirmation Code"
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        return tf
+    var sendTo: String?
+    var user: AWSCognitoIdentityUser?
+    
+    lazy var sentToLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .red
+        return label
+        
     }()
     
+    lazy var usernameTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = .yellow
+        return textField
+    }()
+    
+    lazy var codeTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "Entering the Code"
+        textField.backgroundColor = .brown
+        return textField
+    }()
+    
+
+    
     override func viewDidLoad() {
-        
-        view.addSubview(confirmCodeTextField)
-        //setup views
+        super.viewDidLoad()
+        usernameTextField.text = self.user?.username
+        sentToLabel.text = "Sending to \(self.sendTo ?? "")"
         setUpViews()
     }
     
     func setUpViews() {
-        print("setting up views")
         
-        confirmCodeTextField.topAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        confirmCodeTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        confirmCodeTextField.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -100).isActive = true
-        confirmCodeTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.view.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        self.view.addSubview(sentToLabel)
+        self.view.addSubview(usernameTextField)
+        self.view.addSubview(codeTextField)
+        //setup views
         
         
     }
