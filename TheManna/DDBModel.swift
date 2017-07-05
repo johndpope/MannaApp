@@ -38,6 +38,7 @@ class DDBModel: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
 class DDBTableRow :AWSDynamoDBObjectModel ,AWSDynamoDBModeling  {
     
     var UserId:String?
+    var GameTitle:String?
     
     //set the default values of scores, wins and losses to 0
     var TopScore:NSNumber? = 0
@@ -57,7 +58,7 @@ class DDBTableRow :AWSDynamoDBObjectModel ,AWSDynamoDBModeling  {
     }
     
     class func rangeKeyAttribute() -> String {
-        return "verseTopic"
+        return "GameTitle"
     }
     
     class func ignoreAttributes() -> [String] {

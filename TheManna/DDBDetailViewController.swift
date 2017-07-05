@@ -141,8 +141,18 @@ class DDBDetailViewController: UIViewController {
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        //
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         //code here
+        super.viewWillDisappear(true)
+        if (self.dataChanged) {
+            let c = self.navigationController?.viewControllers.count
+            let mainTableViewController = self.navigationController?.viewControllers [c! - 1] as! DDBMainTableViewController
+            mainTableViewController.needsToRefresh = true
+        }
         
     }
     
@@ -325,7 +335,50 @@ class DDBDetailViewController: UIViewController {
     }
     
     func submit() {
+        let tableRow = DDBTableRow()
+        tableRow?.UserId = self.hashKeyTextField.text
+        tableRow?.GameTitle = self.rangeKeyTextField.text
         
+        if let topScore = Int(self.attribute1TextField.text!) {
+            tableRow?.TopScore = topScore as NSNumber
+        }
+        if let topScore = Int(self.attribute2TextField.text!) {
+            tableRow?.Wins = topScore as NSNumber
+        }
+        if let topScore = Int(self.attribute3TextField.text!) {
+            tableRow?.Losses = topScore as NSNumber
+        }
+        
+        
+        switch self.viewType {
+        case DDBDetailViewType.insert:
+            if ((self.rangeKeyTextField.text?.utf16.count)! > 0) {
+                self.insertTableRow(tableRow!)
+            } else {
+                let alertController = UIAlertController(title: "Error: Invalid Input",
+                                                        message: "Range Key Value cannot be empty.",
+                                                        preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(alertAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            
+        case DDBDetailViewType.update:
+            if ((self.rangeKeyTextField.text?.utf16.count)! > 0) {
+                self.updateTableRow(tableRow!)
+            } else {
+                let alertController = UIAlertController(title: "Error: Invalid Input",
+                                                        message: "Range Key Value cannot be empty.",
+                                                        preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(alertAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            
+        default:
+            print("Invalid View.Type")
+            
+        }
         
     }
     

@@ -19,6 +19,8 @@ class DDBMainTableViewController: UITableViewController {
     var user: AWSCognitoIdentityUser?
     var pool: AWSCognitoIdentityUserPool?
     
+    var needsToRefresh = false
+    
     var scriptures: [DDBModel] = {
         let scriptOne = DDBModel()
         scriptOne?.reference = "romans:3-21"
