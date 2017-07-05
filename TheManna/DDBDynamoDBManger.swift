@@ -157,32 +157,3 @@ class DDBDynamoDBManager: NSObject {
     }
 }
 
-class DDBTableRow :AWSDynamoDBObjectModel ,AWSDynamoDBModeling  {
-    
-    var UserId:String?
-    
-    //set the default values of scores, wins and losses to 0
-    var TopScore:NSNumber? = 0
-    var Wins:NSNumber? = 0
-    var Losses:NSNumber? = 0
-    
-    //should be ignored according to ignoreAttributes
-    var internalName:String?
-    var internalState:NSNumber?
-    
-    class func dynamoDBTableName() -> String {
-        return AWSSampleDynamoDBTableName
-    }
-    
-    class func hashKeyAttribute() -> String {
-        return "UserId"
-    }
-    
-    class func rangeKeyAttribute() -> String {
-        return "verseTopic"
-    }
-    
-    class func ignoreAttributes() -> [String] {
-        return ["internalName", "internalState"]
-    }
-}

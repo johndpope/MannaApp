@@ -62,7 +62,7 @@ class DDBMainTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.response = task.result
                 print("getDetail in TableView Called")
-                print(self.response.debugDescription)
+                //print(self.response.debugDescription)
                 self.tableView.reloadData()
             }
             
@@ -73,14 +73,31 @@ class DDBMainTableViewController: UITableViewController {
     func setupNavigationBar(){
  
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(signOut))
-        let barButtonItem2 = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
-        let barButtonItem3 = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItem))
+        
         self.navigationItem.setRightBarButton(barButtonItem, animated: true)
     }
     
     func addItem() {
+        print("addItem")
         
     }
+    
+    func readItem() {
+        print("updateItem")
+        
+    }
+    
+    func updateItem() {
+        print("update Item")
+    }
+    
+    func deleteItem() {
+        print("deleteItem")
+    }
+    
+
+    
+    
     func signOut() {
         print("Signout")
         user?.signOut()

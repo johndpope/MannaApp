@@ -176,7 +176,7 @@ class SignUpViewController: UIViewController {
                     strongSelf.present(alertController, animated: true, completion: nil)
                 } else if let result = task.result {
                     if result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed {
-                        
+                        strongSelf.confirmSignUpViewController?.sendTo = result.codeDeliveryDetails?.destination
                         strongSelf.navigationController?.pushViewController(strongSelf.confirmSignUpViewController!, animated: true)
                     } else {
                         strongSelf.navigationController?.popToRootViewController(animated: true)

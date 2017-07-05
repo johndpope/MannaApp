@@ -233,12 +233,10 @@ class SignInViewController: UIViewController {
     
     func signInPressed() {
         print("SignInPressed")
-        
         if (self.usernameTextField.text != nil && self.passwordTextField.text != nil) {
             print("Usrenname and password all good")
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.usernameTextField.text!, password: self.passwordTextField.text! )
             self.passwordAuthenticationCompletion?.set(result: authDetails)
-            print(1)
         } else {
             print("There is no either password nor username")
             let alertController = UIAlertController(title: "Missing information",
