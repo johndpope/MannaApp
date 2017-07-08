@@ -273,6 +273,7 @@ class DDBDetailViewController: UIViewController {
     
     
     func insertTableRow(_ tableRow: DDBTableRow) {
+        print(1)
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
         dynamoDBObjectMapper.save(tableRow).continueWith(executor: AWSExecutor.mainThread()) { (task) -> Any? in

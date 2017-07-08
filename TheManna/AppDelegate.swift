@@ -45,12 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        //window?.rootViewController = mainTableNavigationController
-        window?.rootViewController = UINavigationController(rootViewController: DDBDetailViewController())
+        window?.rootViewController = mainTableNavigationController
+        //window?.rootViewController = UINavigationController(rootViewController: DDBDetailViewController())
         
         UINavigationBar.appearance().tintColor = .blue
         
-        //setupAWS()
+        setupAWS()
         
 
         return true

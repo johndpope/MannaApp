@@ -74,14 +74,24 @@ class DDBMainTableViewController: UITableViewController {
     
     func setupNavigationBar(){
  
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(signOut))
+        let cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(signOut))
+        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItem))
+        let refreshBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshItem))
+        let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(editItem))
+        self.navigationItem.rightBarButtonItems = [editBarButtonItem, cancelBarButtonItem]
+        self.navigationItem.leftBarButtonItems = [addBarButtonItem, refreshBarButtonItem]
         
-        self.navigationItem.setRightBarButton(barButtonItem, animated: true)
+    }
+    
+    func editItem(){
+        print("edit Item")
     }
     
     func addItem() {
         print("addItem")
-        
+        let detailViewController = DDBDetailViewController()
+        detailViewController.viewType = .insert
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func readItem() {
@@ -98,6 +108,9 @@ class DDBMainTableViewController: UITableViewController {
     }
     
 
+    func refreshItem(){
+        print("refreshing items")
+    }
     
     
     func signOut() {
