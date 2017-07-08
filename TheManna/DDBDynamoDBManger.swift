@@ -10,7 +10,6 @@ import Foundation
 import AWSDynamoDB
 
 let AWSSampleDynamoDBTableName = "DynamoDB-OM-SwiftSample"
-let AWSScriptureTableName = "ScriptureDB"
 
 class DDBDynamoDBManager: NSObject {
     
@@ -19,7 +18,7 @@ class DDBDynamoDBManager: NSObject {
         
         // See if the test table exists.
         let describeTableInput = AWSDynamoDBDescribeTableInput()
-        describeTableInput?.tableName = AWSScriptureTableName
+        describeTableInput?.tableName = AWSSampleDynamoDBTableName
         return dynamoDB.describeTable(describeTableInput!) as! AWSTask<AnyObject>
     }
     
@@ -97,7 +96,7 @@ class DDBDynamoDBManager: NSObject {
         
         // Create Table 
         let createTableInput = AWSDynamoDBCreateTableInput()
-        createTableInput?.tableName = AWSScriptureTableName
+        createTableInput?.tableName = AWSSampleDynamoDBTableName
         createTableInput?.attributeDefinitions = [hashKeyAttributeDefinition!, rangeKeyAttributeDefinition!, chapterAttributeDefinition!, verseAttributeDefinition!, topicAttributeDefinition!]
         createTableInput?.keySchema = [hashKeySchemaElement!, rangeKeySchemaElement!]
         createTableInput?.provisionedThroughput = provisionedThroughput
@@ -112,7 +111,7 @@ class DDBDynamoDBManager: NSObject {
             
             // wait up for 4 minutes until the table become active
             let describeTableInput = AWSDynamoDBDescribeTableInput()
-            describeTableInput?.tableName = AWSScriptureTableName
+            describeTableInput?.tableName = AWSSampleDynamoDBTableName
             let describeTask = dynamoDB.describeTable(describeTableInput!)
             
             var localTask: AWSTask<AnyObject>?
@@ -138,22 +137,5 @@ class DDBDynamoDBManager: NSObject {
         
     }
     
-    class func insertItem(_ model: DDBModel) {
-        print("Inserting an item right now.......")
-        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
-        
-        dynamoDBObjectMapper.save(model).continueWith(executor: AWSExecutor.mainThread(), block: { (task: AWSTask<AnyObject>) -> Any? in
-                if let err = task.error {
-                    print("Error Occured saving the model")
-                    print(err.localizedDescription)
-                    print(err)
-                } else {
-                    print("Successfully added the mode")
-                    let item = model
-                    print(item.reference ?? "No Reference in model being inserted")
-                }
-                return nil
-        })
-    }
 }
 

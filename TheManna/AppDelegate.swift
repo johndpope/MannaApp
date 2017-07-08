@@ -46,21 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = mainTableNavigationController
-        //window?.rootViewController = UINavigationController(rootViewController: DDBDetailViewController())
         
         UINavigationBar.appearance().tintColor = .blue
         
         setupAWS()
         
-
         return true
-    }
-    
-    func setupDynamoDB(){
-        
-        let credentialProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: vvaultIdentityPoolId)
-        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
     }
 
     
@@ -85,7 +76,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                 identityPoolId: vvaultIdentityPoolId,
                                                                 identityProviderManager:pool)
         
+        AWSServiceManager.default().defaultServiceConfiguration = AWSServiceConfiguration(region: .USEast1,
+                                                                                          credentialsProvider: credentialsProvider)
+        
         pool.delegate = self
+        
+        
         
         credentialsProvider.getIdentityId().continueWith { (task: AWSTask<NSString>) -> Any? in
             if let err = task.error { print("error getIdentityID: \n \n \t\(err)") } else {
@@ -95,8 +91,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return nil
         }
         
+        print(pool.identityProviderName)
         print("Current User Signed In Already?")
-        print(pool.currentUser()?.isSignedIn as Any)
+        if let currentUser = pool.currentUser() {
+            print(currentUser.isSignedIn)
+        } else {
+            print("No Current User")
+        }
+
        
       
     }

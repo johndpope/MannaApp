@@ -233,7 +233,7 @@ class DDBDetailViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertTableRow))
+        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(submit))
         let updateBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(updateTableRow))
         self.navigationItem.rightBarButtonItems = [addBarButtonItem, updateBarButtonItem]
         
