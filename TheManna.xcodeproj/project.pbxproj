@@ -45,6 +45,7 @@
 		A76CE9D41F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */; };
 		A76CE9D61F0BD16B001E58B8 /* DDBDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D51F0BD16B001E58B8 /* DDBDetailViewController.swift */; };
 		A76CE9D81F117F7B001E58B8 /* DBMainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D71F117F7B001E58B8 /* DBMainTableCell.swift */; };
+		A76CE9DA1F1435D5001E58B8 /* PrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D91F1435D5001E58B8 /* PrayerViewController.swift */; };
 		B0C838FA7C132831524DF2D4 /* Pods_TheManna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		A76CE9D51F0BD16B001E58B8 /* DDBDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDBDetailViewController.swift; sourceTree = "<group>"; };
 		A76CE9D71F117F7B001E58B8 /* DBMainTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBMainTableCell.swift; sourceTree = "<group>"; };
+		A76CE9D91F1435D5001E58B8 /* PrayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrayerViewController.swift; sourceTree = "<group>"; };
 		E75D2BDF06C3E4027262302A /* Pods_TheManna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheManna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -184,6 +186,7 @@
 			children = (
 				A700BB7A1EE0E7FA003254B0 /* HomeDatasourceController.swift */,
 				A700BB891EE43FF2003254B0 /* HomeDatasourceController+navbar.swift */,
+				A76CE9D91F1435D5001E58B8 /* PrayerViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				A70881441EF6BF7600DCA947 /* ConfirmSignUpViewController.swift in Sources */,
 				A700BB861EE361D9003254B0 /* UserCell.swift in Sources */,
 				A700BB6C1EE07C1E003254B0 /* TheManna.xcdatamodeld in Sources */,
+				A76CE9DA1F1435D5001E58B8 /* PrayerViewController.swift in Sources */,
 				A708814C1EFC5CCB00DCA947 /* DDBTableRow.swift in Sources */,
 				A70881481EFB5CFD00DCA947 /* DDBDynamoDBManger.swift in Sources */,
 				A700BB7B1EE0E7FA003254B0 /* HomeDatasourceController.swift in Sources */,

@@ -45,8 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = mainTableNavigationController
-        
+        //window?.rootViewController = mainTableNavigationController
+        window?.rootViewController = UINavigationController(rootViewController:
+            RootViewController(collectionViewLayout: UICollectionViewLayout()))
         UINavigationBar.appearance().tintColor = .blue
         
         setupAWS()

@@ -21,7 +21,6 @@ class DDBDetailViewController: UIViewController {
         case update
     }
     
-    
     lazy var hashKeyTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +66,6 @@ class DDBDetailViewController: UIViewController {
         textField.backgroundColor = .red
         return textField
     }()
-
 
     var saveButton: UIButton = {
         let button = UIButton(type: UIButtonType.system)
@@ -142,7 +140,9 @@ class DDBDetailViewController: UIViewController {
     }
     
     override func didReceiveMemoryWarning() {
-        //
+        print("received Memory Warning for DetailViewController")
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -155,7 +155,6 @@ class DDBDetailViewController: UIViewController {
         }
         
     }
-    
     
     func setupViews() {
         self.view.backgroundColor = .white
@@ -233,19 +232,15 @@ class DDBDetailViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(submit))
-        let updateBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(updateTableRow))
-        self.navigationItem.rightBarButtonItems = [addBarButtonItem, updateBarButtonItem]
-        
-        
+        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(submit))
+        self.navigationItem.rightBarButtonItems = [addBarButtonItem]
     }
-    
     
     func getTableRow() {
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
         //tableRow?.UserId --> (tableRow?.UserId)!
-        dynamoDBObjectMapper.load(DDBTableRow.self, hashKey: (tableRow?.UserId)!, rangeKey: nil)
+        dynamoDBObjectMapper.load(DDBTableRow.self, hashKey: (tableRow?.UserId)!, rangeKey: tableRow?.GameTitle)
             .continueWith(executor: AWSExecutor.mainThread()) { task -> Any? in
                 if let err = task.error {
                     print("getTableRow failed: \(err)")
@@ -260,8 +255,11 @@ class DDBDetailViewController: UIViewController {
                                  animated: true, completion: nil)
                 } else if let tableRow = task.result as? DDBTableRow {
                     print("getTableRow success")
-                    self.rangeKeyTextField.text = tableRow.UserId
-                    self.hashKeyTextField.text = String(describing: tableRow.Losses)
+                    self.rangeKeyTextField.text = tableRow.UserId!
+                    self.hashKeyTextField.text = String(describing: tableRow.GameTitle!)
+                    self.attribute1TextField.text = String(describing: tableRow.Losses!)
+                    self.attribute2TextField.text = String(describing: tableRow.Wins!)
+                    self.attribute3TextField.text = String(describing: tableRow.TopScore!)
                     
                     
                 }
@@ -270,7 +268,6 @@ class DDBDetailViewController: UIViewController {
         
        
     }
-    
     
     func insertTableRow(_ tableRow: DDBTableRow) {
         print(1)
@@ -340,14 +337,14 @@ class DDBDetailViewController: UIViewController {
         tableRow?.UserId = self.hashKeyTextField.text
         tableRow?.GameTitle = self.rangeKeyTextField.text
         
-        if let topScore = Int(self.attribute1TextField.text!) {
-            tableRow?.TopScore = topScore as NSNumber
+        if let attr1 = Int(self.attribute1TextField.text!) {
+            tableRow?.TopScore = attr1 as NSNumber
         }
-        if let topScore = Int(self.attribute2TextField.text!) {
-            tableRow?.Wins = topScore as NSNumber
+        if let attr2 = Int(self.attribute2TextField.text!) {
+            tableRow?.Wins = attr2 as NSNumber
         }
-        if let topScore = Int(self.attribute3TextField.text!) {
-            tableRow?.Losses = topScore as NSNumber
+        if let attr3 = Int(self.attribute3TextField.text!) {
+            tableRow?.Losses = attr3 as NSNumber
         }
         
         

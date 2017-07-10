@@ -13,8 +13,11 @@ class DBMainTableCell: UITableViewCell {
     
     var tableRow: DDBTableRow? {
         didSet {
-            self.label1.text = "User Id" + String(describing: tableRow!.UserId)
-            self.label2.text = String(describing: tableRow!.GameTitle)
+            self.label1.text = String(describing: tableRow!.UserId!)
+            self.label2.text = String(describing: tableRow!.GameTitle!)
+            self.label3.text = String(describing: tableRow!.TopScore!)
+            self.label4.text = String(describing: tableRow!.Wins!)
+            self.textLabel?.text = String(describing: tableRow!.Losses!)
         }
     }
     

@@ -49,6 +49,8 @@ class DDBMainTableViewController: UITableViewController {
             self.user = self.pool?.currentUser()
         }
         
+        tableRows = []
+        self.setupTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +61,17 @@ class DDBMainTableViewController: UITableViewController {
         }
     }
     
+    // Setting up views
+    func setupNavigationBar(){
+        
+        let cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(signOut))
+        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTableRow))
+        self.navigationItem.rightBarButtonItems = [cancelBarButtonItem]
+        self.navigationItem.leftBarButtonItems = [addBarButtonItem]
+        
+    }
+    
+    // This function called for user pool
     func refresh() {
         self.user?.getDetails().continueOnSuccessWith(block: { (task: AWSTask<AWSCognitoIdentityUserGetDetailsResponse>) -> Any? in
             DispatchQueue.main.async {
@@ -71,22 +84,6 @@ class DDBMainTableViewController: UITableViewController {
         })
     }
     
-    func setupNavigationBar(){
- 
-        let cancelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(signOut))
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTableRow))
-        self.navigationItem.rightBarButtonItems = [cancelBarButtonItem]
-        self.navigationItem.leftBarButtonItems = [addBarButtonItem]
-        
-    }
-    
-    
-    func addTableRow() {
-        let detailViewController = DDBDetailViewController()
-        detailViewController.viewType = .insert
-        self.navigationController?.pushViewController(detailViewController, animated: true)
-    }
-    
     func signOut() {
         print("Signout")
         user?.signOut()
@@ -95,6 +92,19 @@ class DDBMainTableViewController: UITableViewController {
         self.refresh()
         tableView.reloadData()
     }
+    
+
+    
+    func addTableRow() {
+        let detailViewController = DDBDetailViewController()
+        detailViewController.viewType = .insert
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func deleteTableRow() {
+        
+    }
+    
     func setupTable() {
         
         DDBDynamoDBManager.describeTable().continueWith(executor: AWSExecutor.mainThread(), block: { task -> Any? in
@@ -130,6 +140,7 @@ class DDBMainTableViewController: UITableViewController {
     }
     
     func refreshList(_ startFromBegining: Bool)  {
+        
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         let queryExpression = AWSDynamoDBScanExpression()
@@ -173,6 +184,19 @@ class DDBMainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = DDBDetailViewController()
+        detailViewController.viewType = .update
+        detailViewController.tableRow = tableRows?[indexPath.row]
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
 }
 
 
