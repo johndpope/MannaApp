@@ -185,10 +185,6 @@ class DDBMainTableViewController: UITableViewController {
         return 100
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = DDBDetailViewController()
@@ -197,6 +193,29 @@ class DDBMainTableViewController: UITableViewController {
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let shareAction = UITableViewRowAction(style: .normal, title: "Share") { (action: UITableViewRowAction, indexPath: IndexPath) in
+       
+        }
+        shareAction.backgroundColor = .blue
+        
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action: UITableViewRowAction, indexPath: IndexPath) in
+            
+        }
+        deleteAction.backgroundColor = .red
+        return [shareAction, deleteAction]
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            print("Deleting")
+        }
+    }
 }
 
 

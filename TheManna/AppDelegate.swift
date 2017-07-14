@@ -45,10 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        //window?.rootViewController = mainTableNavigationController
-        window?.rootViewController = UINavigationController(rootViewController:
-            RootViewController(collectionViewLayout: UICollectionViewLayout()))
+        window?.rootViewController = mainTableNavigationController
+        
+//        let layout = UICollectionViewFlowLayout()
+//        window?.rootViewController = UINavigationController(rootViewController:
+//            PrayerViewContoller(collectionViewLayout: layout))
         UINavigationBar.appearance().tintColor = .blue
+        
         
         setupAWS()
         

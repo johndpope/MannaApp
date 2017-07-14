@@ -62,6 +62,7 @@ class DBMainTableCell: UITableViewCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.text = "Label 5"
         textView.font = UIFont.boldSystemFont(ofSize: 9)
+        textView.isUserInteractionEnabled = false
         
         return textView
     }()
