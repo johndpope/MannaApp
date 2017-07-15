@@ -20,10 +20,44 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
         return button
     }()
     
+    let stopButton: UIButton = {
+        let button = UIButton(type: UIButtonType.custom)
+        button.setTitle("Stop", for: .normal)
+        button.backgroundColor = .red
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let topicLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Topic:"
+        return label
+    }()
+    
+    let contentTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = .yellow
+        return textField
+    }()
+    
+    let feedbackTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.text = "Feedback from the database will show some hints and also directions"
+        textField.backgroundColor = .blue
+        return textField
+        
+    }()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(PrayerCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView?.backgroundColor = .white
+        
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

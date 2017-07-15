@@ -40,6 +40,7 @@
 		A70881511EFD4E0700DCA947 /* IdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881501EFD4E0700DCA947 /* IdentityProvider.swift */; };
 		A70881531EFE7E9700DCA947 /* DDBLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881521EFE7E9700DCA947 /* DDBLoadingViewController.swift */; };
 		A70881AC1F05CB8D00DCA947 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881AB1F05CB8D00DCA947 /* Service.swift */; };
+		A75DCAD91F19B64200ADE866 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75DCAD81F19B64200ADE866 /* Prayer.swift */; };
 		A76CE9D01F0A95F8001E58B8 /* MFAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9CF1F0A95F8001E58B8 /* MFAViewController.swift */; };
 		A76CE9D21F0A9625001E58B8 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D11F0A9625001E58B8 /* ForgotPasswordViewController.swift */; };
 		A76CE9D41F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */; };
@@ -87,6 +88,7 @@
 		A70881501EFD4E0700DCA947 /* IdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityProvider.swift; sourceTree = "<group>"; };
 		A70881521EFE7E9700DCA947 /* DDBLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDBLoadingViewController.swift; sourceTree = "<group>"; };
 		A70881AB1F05CB8D00DCA947 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		A75DCAD81F19B64200ADE866 /* Prayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
 		A76CE9CF1F0A95F8001E58B8 /* MFAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFAViewController.swift; sourceTree = "<group>"; };
 		A76CE9D11F0A9625001E58B8 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				A700BB811EE0F318003254B0 /* HomeDatasource.swift */,
 				A700BB831EE35871003254B0 /* User.swift */,
 				A700BB911EEC0FF4003254B0 /* Tweet.swift */,
+				A75DCAD81F19B64200ADE866 /* Prayer.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				A70881441EF6BF7600DCA947 /* ConfirmSignUpViewController.swift in Sources */,
 				A700BB861EE361D9003254B0 /* UserCell.swift in Sources */,
 				A700BB6C1EE07C1E003254B0 /* TheManna.xcdatamodeld in Sources */,
+				A75DCAD91F19B64200ADE866 /* Prayer.swift in Sources */,
 				A76CE9DA1F1435D5001E58B8 /* PrayerViewController.swift in Sources */,
 				A708814C1EFC5CCB00DCA947 /* DDBTableRow.swift in Sources */,
 				A70881481EFB5CFD00DCA947 /* DDBDynamoDBManger.swift in Sources */,

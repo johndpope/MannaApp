@@ -200,21 +200,19 @@ class DDBMainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let shareAction = UITableViewRowAction(style: .normal, title: "Share") { (action: UITableViewRowAction, indexPath: IndexPath) in
-       
+            print("Share")
         }
         shareAction.backgroundColor = .blue
         
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action: UITableViewRowAction, indexPath: IndexPath) in
-            
+            print("Deleting.........")
         }
         deleteAction.backgroundColor = .red
         return [shareAction, deleteAction]
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            print("Deleting")
-        }
+
     }
 }
 
