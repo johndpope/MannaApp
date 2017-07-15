@@ -41,6 +41,7 @@
 		A70881531EFE7E9700DCA947 /* DDBLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881521EFE7E9700DCA947 /* DDBLoadingViewController.swift */; };
 		A70881AC1F05CB8D00DCA947 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70881AB1F05CB8D00DCA947 /* Service.swift */; };
 		A75DCAD91F19B64200ADE866 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75DCAD81F19B64200ADE866 /* Prayer.swift */; };
+		A75DCADB1F1AAF2300ADE866 /* AmazonClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75DCADA1F1AAF2300ADE866 /* AmazonClientManager.swift */; };
 		A76CE9D01F0A95F8001E58B8 /* MFAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9CF1F0A95F8001E58B8 /* MFAViewController.swift */; };
 		A76CE9D21F0A9625001E58B8 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D11F0A9625001E58B8 /* ForgotPasswordViewController.swift */; };
 		A76CE9D41F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */; };
@@ -89,6 +90,7 @@
 		A70881521EFE7E9700DCA947 /* DDBLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDBLoadingViewController.swift; sourceTree = "<group>"; };
 		A70881AB1F05CB8D00DCA947 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		A75DCAD81F19B64200ADE866 /* Prayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
+		A75DCADA1F1AAF2300ADE866 /* AmazonClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonClientManager.swift; sourceTree = "<group>"; };
 		A76CE9CF1F0A95F8001E58B8 /* MFAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFAViewController.swift; sourceTree = "<group>"; };
 		A76CE9D11F0A9625001E58B8 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		A76CE9D31F0A963C001E58B8 /* ConfirmForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				A708814E1EFD3B5900DCA947 /* Cognito */,
 				A708814D1EFD3B4300DCA947 /* DynamoDB */,
 				A70881451EF6BF8C00DCA947 /* Constants.swift */,
+				A75DCADA1F1AAF2300ADE866 /* AmazonClientManager.swift */,
 			);
 			name = AWS;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A700BB8A1EE43FF2003254B0 /* HomeDatasourceController+navbar.swift in Sources */,
+				A75DCADB1F1AAF2300ADE866 /* AmazonClientManager.swift in Sources */,
 				A76CE9D81F117F7B001E58B8 /* DBMainTableCell.swift in Sources */,
 				A76CE9D21F0A9625001E58B8 /* ForgotPasswordViewController.swift in Sources */,
 				A70881441EF6BF7600DCA947 /* ConfirmSignUpViewController.swift in Sources */,

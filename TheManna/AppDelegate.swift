@@ -45,11 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        //window?.rootViewController = mainTableNavigationController
+        window?.rootViewController = mainTableNavigationController
         
-        let layout = UICollectionViewFlowLayout()
-        window?.rootViewController = UINavigationController(rootViewController:
-            PrayerViewContoller(collectionViewLayout: layout))
+//        let layout = UICollectionViewFlowLayout()
+//        window?.rootViewController = UINavigationController(rootViewController:
+//            PrayerViewContoller(collectionViewLayout: layout))
         UINavigationBar.appearance().tintColor = .blue
         
         
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    
+
     func setupAWS() {
         // setup logging
         AWSDDLog.sharedInstance.logLevel = .verbose
@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         pool.delegate = self
         
-        
+       
         
         credentialsProvider.getIdentityId().continueWith { (task: AWSTask<NSString>) -> Any? in
             if let err = task.error { print("error getIdentityID: \n \n \t\(err)") } else {
@@ -102,9 +102,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             print("No Current User")
         }
+        // us-east-1:fe41bfaa-dbe8-4564-9690-c50e73ee3f61 Josh7218
+        // us-east-1:5d116dd9-8f99-4ca2-876e-4e68a3dda624 Jeremy7218
+       //pool.currentUser()?.signOut()
 
-       
-      
+        //credentialsProvider.clearKeychain()
     }
 
     

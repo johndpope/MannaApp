@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
-
+import AWSCognitoIdentityProvider
+import AWSCognito
 class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    // MARK: === Data Member ===
     
     let startButton: UIButton = {
         let button = UIButton(type: UIButtonType.custom)
@@ -24,6 +26,21 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
         let button = UIButton(type: UIButtonType.custom)
         button.setTitle("Stop", for: .normal)
         button.backgroundColor = .red
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let doneButton: UIButton = {
+        let button = UIButton(type: UIButtonType.custom)
+        button.setTitle("Done", for: .normal)
+        button.backgroundColor = .blue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let logoutButton: UIButton = {
+        let button = UIButton(type: UIButtonType.system)
+        button.setTitle("Logout", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -51,13 +68,37 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
         
     }()
     
+    // MARK: === Properties ===
     
+    var pool: AWSCognitoIdentityUserPool?
+    var provier: AWSCognitoIdentityProvider?
+    var user: AWSCognitoIdentityUser?
+    
+    // MARK: === Operation ===
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(PrayerCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView?.backgroundColor = .white
+        setupNavigationBar()
+        pool = AWSCognitoIdentityUserPool(forKey: "UserPool")
+        user = pool?.currentUser()
         
+    }
+    
+    func setupNavigationBar(){
+        let logoutBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(logout))
+        self.navigationItem.rightBarButtonItem = logoutBarButtonItem
+    }
+    
+    func logout() {
+        
+        print("Successfully logout user: \(String(describing: pool?.currentUser()?.username))")
+        
+        self.collectionView?.reloadData()
+        
+        //user?.signOut()
+        user?.globalSignOut()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -82,6 +123,7 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
         return 1
     }
     
+    // MARK: END
     
 }
 

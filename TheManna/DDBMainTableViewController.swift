@@ -86,7 +86,7 @@ class DDBMainTableViewController: UITableViewController {
     
     func signOut() {
         print("Signout")
-        user?.signOut()
+        user?.globalSignOut()
         response = nil
         pool?.clearAll()
         self.refresh()
