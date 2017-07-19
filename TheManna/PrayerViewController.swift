@@ -70,9 +70,9 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
     
     // MARK: === Properties ===
     
-    var pool: AWSCognitoIdentityUserPool?
-    var provier: AWSCognitoIdentityProvider?
-    var user: AWSCognitoIdentityUser?
+//    var pool: AWSCognitoIdentityUserPool?
+//    var provier: AWSCognitoIdentityProvider?
+//    var user: AWSCognitoIdentityUser?
     
     // MARK: === Operation ===
     
@@ -80,9 +80,9 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidLoad()
         collectionView?.register(PrayerCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView?.backgroundColor = .white
-        setupNavigationBar()
-        pool = AWSCognitoIdentityUserPool(forKey: "UserPool")
-        user = pool?.currentUser()
+//        setupNavigationBar()
+//        pool = AWSCognitoIdentityUserPool(forKey: "UserPool")
+//        user = pool?.currentUser()
         
     }
     
@@ -93,12 +93,10 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
     
     func logout() {
         
-        print("Successfully logout user: \(String(describing: pool?.currentUser()?.username))")
+        print("Successfully logout user: ")
         
         self.collectionView?.reloadData()
         
-        //user?.signOut()
-        user?.globalSignOut()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -115,7 +113,7 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        return CGSize(width: view.frame.width, height: 400)
     }
     
     
@@ -144,6 +142,31 @@ class PrayerCell: UICollectionViewCell {
         return textField
     }()
     
+    var illustrationImageView: UIImageView = {
+       let imageView = UIImageView(image: #imageLiteral(resourceName: "selfie"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .gray
+        return imageView
+    }()
+    
+    var iconImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "rwenderlich"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .black
+        return imageView
+        
+    }()
+    
+    var addButton: UIButton = {
+        let button = UIButton(type: UIButtonType.system)
+        button.setTitle("REP", for: .normal)
+       
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -155,16 +178,28 @@ class PrayerCell: UICollectionViewCell {
     
     func setupViews() {
         self.backgroundColor = .yellow
-        addSubview(titleLabel)
-        addSubview(scriptureTextField)
+          addSubview(illustrationImageView)
+          addSubview(illustrationImageView)
+        addSubview(iconImageView)
+          //addSubview(titleLabel)
+//        addSubview(scriptureTextField)
+
+
+//        addSubview(addButton)
         
-        addConstraintsWithFormat("H:|-16-[v0]-16-|", views: scriptureTextField)
-        addConstraintsWithFormat("V:|-16-[v0]-50-|", views: scriptureTextField)
         
-        titleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        addConstraintsWithFormat("H:|-10-[v0]-10-|", views: illustrationImageView)
+        addConstraintsWithFormat("V:|-10-[v0]-100-|", views: illustrationImageView)
+        
+        addConstraintsWithFormat("H:|-10-[v0(80)]", views: iconImageView)
+        addConstraintsWithFormat("V:[v0]-5-[v1]-5-|", views: illustrationImageView, iconImageView)
+        
+        
+        
+//        titleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+//        titleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//        titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
     }
 }

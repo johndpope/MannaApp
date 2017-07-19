@@ -25,6 +25,8 @@ class AmazonClientManager: NSObject {
         case FB, GOOGLE
     }
     
+    var credentialProvider: AWSCognitoCredentialsProvider?
+    
     // Keychain constants
     let FB_PROVIDER = Provider.FB.rawValue
     let GOOGLE_PROVIDER = Provider.GOOGLE.rawValue
@@ -37,6 +39,24 @@ class AmazonClientManager: NSObject {
     
     // MARK: === Operation ===
     
+    // General Login
+    
+    func completeLogin(logins: [NSObject: AnyObject]?) {
+        var task: AWSTask<AnyObject>?
+        
+        if self.credentialProvider == nil {
+            
+        } else {
+            
+        }
+    }
+    
+    func initializeClients(logins: [NSObject: AnyObject]?) -> AWSTask<AnyObject>? {
+        print("Initializing Client")
+        
+        
+        return self.credentialProvider?.getIdentityId() as! AWSTask<AnyObject>
+    }
     func signOut() {
         
     }
