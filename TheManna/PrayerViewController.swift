@@ -181,8 +181,8 @@ class PrayerCell: UICollectionViewCell {
           addSubview(illustrationImageView)
           addSubview(illustrationImageView)
         addSubview(iconImageView)
-          //addSubview(titleLabel)
-//        addSubview(scriptureTextField)
+          addSubview(titleLabel)
+            addSubview(scriptureTextField)
 
 
 //        addSubview(addButton)
@@ -196,10 +196,15 @@ class PrayerCell: UICollectionViewCell {
         
         
         
-//        titleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-//        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-//        titleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//        titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: illustrationImageView.bottomAnchor).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        titleLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        scriptureTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        scriptureTextField.leftAnchor.constraint(equalTo: iconImageView.rightAnchor).isActive = true
+        scriptureTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        scriptureTextField.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
     }
 }
