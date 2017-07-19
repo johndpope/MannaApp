@@ -80,15 +80,49 @@ class PrayerViewContoller: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidLoad()
         collectionView?.register(PrayerCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView?.backgroundColor = .white
-//        setupNavigationBar()
+        setupNavigationBar()
 //        pool = AWSCognitoIdentityUserPool(forKey: "UserPool")
 //        user = pool?.currentUser()
         
     }
     
     func setupNavigationBar(){
-        let logoutBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(logout))
-        self.navigationItem.rightBarButtonItem = logoutBarButtonItem
+        let logoutBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(slideOut))
+        self.navigationItem.leftBarButtonItem = logoutBarButtonItem
+    }
+    
+    let blackView = UIView()
+    
+    func slideOut()  {
+      
+        if let window = UIApplication.shared.keyWindow {
+              print("Sliding Out")
+            
+            blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            
+            window.addSubview(blackView)
+            blackView.frame = window.frame
+            blackView.alpha = 0
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.blackView.alpha = 1
+            })
+            
+            let menuView = UIView()
+            menuView.frame = CGRect(x: 0, y: 0, width: (self.view.frame.width)/2, height: self.view.frame.height)
+            menuView.backgroundColor = .blue
+
+        }
+
+        
+    }
+    
+    func handleDismiss(){
+        UIView.animate(withDuration: 0.5) { 
+            self.blackView.alpha = 0
+        }
     }
     
     func logout() {
@@ -132,12 +166,14 @@ class PrayerCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "TEST"
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor.blue
         return label
     }()
     
     var scriptureTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.text = "For all have sinned and fall short of the glory of God, but the righteous of God has been given to those who believe in him and shall never parish"
         textField.backgroundColor = .yellow
         return textField
     }()
@@ -155,6 +191,8 @@ class PrayerCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
+        imageView.layer.cornerRadius = 40
+        imageView.layer.masksToBounds = true
         return imageView
         
     }()
@@ -162,10 +200,15 @@ class PrayerCell: UICollectionViewCell {
     var addButton: UIButton = {
         let button = UIButton(type: UIButtonType.system)
         button.setTitle("REP", for: .normal)
-       
+        button.backgroundColor = .brown
+        button.addTarget(self, action: #selector(REP), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    func REP() {
+        print("Button Being Pushed")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -178,14 +221,12 @@ class PrayerCell: UICollectionViewCell {
     
     func setupViews() {
         self.backgroundColor = .yellow
-          addSubview(illustrationImageView)
-          addSubview(illustrationImageView)
+        addSubview(illustrationImageView)
+        addSubview(illustrationImageView)
         addSubview(iconImageView)
-          addSubview(titleLabel)
-            addSubview(scriptureTextField)
-
-
-//        addSubview(addButton)
+        addSubview(titleLabel)
+        addSubview(scriptureTextField)
+        addSubview(addButton)
         
         
         addConstraintsWithFormat("H:|-10-[v0]-10-|", views: illustrationImageView)
@@ -194,17 +235,18 @@ class PrayerCell: UICollectionViewCell {
         addConstraintsWithFormat("H:|-10-[v0(80)]", views: iconImageView)
         addConstraintsWithFormat("V:[v0]-5-[v1]-5-|", views: illustrationImageView, iconImageView)
         
+        addConstraintsWithFormat("H:[v0(50)]-10-|", views: addButton)
+        addConstraintsWithFormat("V:|-10-[v0(50)]", views: addButton)
         
-        
-        titleLabel.topAnchor.constraint(equalTo: illustrationImageView.bottomAnchor).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: illustrationImageView.bottomAnchor, constant: 5).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 5).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        titleLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
         
-        scriptureTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-        scriptureTextField.leftAnchor.constraint(equalTo: iconImageView.rightAnchor).isActive = true
-        scriptureTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        scriptureTextField.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        scriptureTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+        scriptureTextField.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 5).isActive = true
+        scriptureTextField.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+        scriptureTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
         
     }
 }
